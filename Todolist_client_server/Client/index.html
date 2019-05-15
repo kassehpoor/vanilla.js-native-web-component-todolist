@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+    <title>ToDoListProject</title>
+    <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+<header>
+    <h1>ToDo List</h1>
+</header>
+<main>
+    <div>
+        <div>
+            <input type="text" placeholder="Enter your task..." id="todoText">
+            <input type="button" value="Add"   id = "addButton"  >
+			<input type="button" value="X All" id = "deleteButton" >
+        </div>
+        <div>
+            <ul id="todoList">
+            </ul>
+        </div>
+    </div>
+</main>
+<script src="db.js"></script>
+<script src="view.js"></script>
+<script src="controller.js"></script>
+
+</body>
+</html>

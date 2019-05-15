@@ -1,0 +1,14 @@
+.complete {
+    text-decoration: line-through;
+    font-style: italic;
+    color: gray;
+}
+
+.active {
+    color: black;
+}
+
+.buttons-container {
+    /*display: inline;*/
+    float: right;
+}
