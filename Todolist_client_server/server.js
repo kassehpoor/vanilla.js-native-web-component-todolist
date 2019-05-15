@@ -1,16 +1,15 @@
 var http = require('http');
 var fs = require('fs');
 
-const port = 7070;
+const port = 3030;
 
 
 var server = http.createServer(function (req, res) {
-	console.log(req.method, req.url);
-	
-//--------------------------------------------------------------------------------
-	if (req.method === 'GET'){
+	console.log(req.method, req.url,__dirname);
+
+	if (req.method === 'GET'){//***************Get *****************************
 		if (req.url === '/') {
-			fs.readFile(__dirname+'/index.html', function (err, pageData) {
+			fs.readFile('./Client/index.html', function (err, pageData) {
 				if (err){
 					res.writeHead(500);
 					return res.end('Error loading index.html');
@@ -22,7 +21,7 @@ var server = http.createServer(function (req, res) {
 			});
 		}
 		else {
-			fs.readFile(__dirname+req.url, function (err, pageData) {
+			fs.readFile('./Client/'+req.url, function (err, pageData) {
 				if (err){
 					res.writeHead(500);
 					return res.end('Error loading index.html');
@@ -33,9 +32,9 @@ var server = http.createServer(function (req, res) {
 				}
 			});
 		}
-	}
-	else if (req.method === 'POST'){
-		if (req.url === '/write/'){
+	}//**************************************** end of Get**********************
+	else if (req.method === 'POST'){//****************** *post******************
+		if (req.url === '/write/') {
 			var data = [];
 			req.on('data', chunk => {
 				data.push(chunk)
@@ -48,36 +47,24 @@ var server = http.createServer(function (req, res) {
 					res.end();
 				});
 			});
-		}
-	}
+		} else if (req.method === 'GET' && req.url === '/read/') {
+			fs.createReadStream(__dirname+'storage.txt').pipe(res);
+		 } else { 
+			 res.end(); 
+		};
+	}else{res.end();};//*************************************end of post*********
 }
-
-	// //----------------------------------------------------------------------------- 
-	// if (req.method === 'POST' && req.url === '/write/') {
-	// 	var data = [];
-	// 	req.on('data', chunk => {
-	// 		data.push(chunk)
-	// 	});
-	// 	req.on('end', () => {
-	// 		var obj = JSON.parse(data);
-	// 		fs.appendFile('storage.txt',obj.value,(err) =>{
-	// 			if (err) console.log(err);
-	// 			console.log('successfully written to storage.txt file !');
-	// 			res.end();
-	// 		});
-	// 	});
-	// } else if (req.method === 'GET' && req.url === '/read/'){
-	// 		fs.createReadStream(__dirname+'storage.txt').pipe(res);
-	// 		res.end();
-	// } else {
-	// 	res.end();
-	// }
-	//------------------------------------------------------------------------------
 );
 server.listen(port);
 server.on('listening', function () {
 	console.log('Listenning on port ' + port);
 });
+
+
+
+
+
+
 
 
 
