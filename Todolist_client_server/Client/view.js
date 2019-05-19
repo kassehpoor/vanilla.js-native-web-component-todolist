@@ -1,4 +1,6 @@
 var view = (function () {
+	var downloadTodos = document.getElementById("DownloadButton");
+	var uploadTodos =document.getElementById("UplodButton");
 	var todoText = document.getElementById("todoText");
 	var addButton = document.getElementById("addButton");
 	var todoListEl = document.getElementById('todoList');
@@ -27,6 +29,9 @@ var view = (function () {
 			controller.addTodo(value);
 			todoText.value = '';
 		};
+		downloadTodos.onclick =function (){controller.download()} ;
+		uploadTodos.onclick = function (){controller.upload()};
+		
 	}
 
 	function createLi(todo) {

@@ -2,7 +2,7 @@ var controller = (function () {
 	var _todos = [];
 	var _filter = 0; // 0:all   1:active   2:complete
 	
-	init();
+	//init();
 
 	return {
 		addTodo: addTodo,
@@ -10,6 +10,8 @@ var controller = (function () {
 		removeAllTodos: removeAllTodos,
 		remove: remove,
 		setFilter: setFilter,
+		download :download,
+		upload : upload,
 	};
 
 	function addTodo(value) {
@@ -43,7 +45,7 @@ var controller = (function () {
 	// ================================================================
 
 
-	function init() {
+	function download() {
 		var result;
 		var model = db.getModel((res)=>{
 			console.log('recived response from server in controller: '+res);
@@ -62,9 +64,11 @@ var controller = (function () {
 			}));
 	}
 
-
-	function render() {
+	function upload(){
 		db.setModel({ todos: _todos, filter: _filter });
+	};
+	function render() {
+		//db.setModel({ todos: _todos, filter: _filter });
 		view.render(filterTodos());
 	}
 
