@@ -1,7 +1,7 @@
 var http = require('http');
 var fs = require('fs');
 
-const port = 3030;
+const port = 4040;
 
 
 var server = http.createServer(function (req, res) {
@@ -19,9 +19,14 @@ var server = http.createServer(function (req, res) {
 					res.end();
 				}
 			});
-		}
-		else {
-			fs.readFile('./Client/'+req.url, function (err, pageData) {
+		} else if (req.url === '/read/') {
+			res.writeHead(200, { 'Content-Type': 'text/json' });
+			fs.readFile('./storage.txt', function(err, content){
+				res.write(content);
+				res.end();
+			});
+		}else {
+			fs.readFile('./Client/' + req.url, function (err, pageData) {
 				if (err){
 					res.writeHead(500);
 					return res.end('Error loading index.html');
@@ -32,27 +37,24 @@ var server = http.createServer(function (req, res) {
 				}
 			});
 		}
-	}//**************************************** end of Get**********************
-	else if (req.method === 'POST'){//****************** *post******************
+	}//****************************************end of Get**********************
+	else if (req.method === 'POST'){//*******************post******************
 		if (req.url === '/write/') {
-			var data = [];
+			var bytes = [];
 			req.on('data', chunk => {
-				data.push(chunk)
+				bytes.push(chunk)
 			});
 			req.on('end', () => {
+				data = bytes.toString('utf8')
 				var obj = JSON.parse(data);
-				fs.appendFile('storage.txt', obj.value, (err) => {
+				fs.writeFile('storage.txt', data, (err) => {
 					if (err) console.log(err);
 					console.log('successfully written to storage.txt file !');
 					res.end();
 				});
 			});
-		} else if (req.method === 'GET' && req.url === '/read/') {
-			fs.createReadStream(__dirname+'storage.txt').pipe(res);
-		 } else { 
-			 res.end(); 
-		};
-	}else{res.end();};//*************************************end of post*********
+		} 
+	}else{res.end();};//*************************************end of post********
 }
 );
 server.listen(port);

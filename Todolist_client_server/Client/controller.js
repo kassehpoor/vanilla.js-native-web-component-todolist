@@ -44,10 +44,14 @@ var controller = (function () {
 
 
 	function init() {
-		var model = db.getModel() || { todos: [], filter: 0 };
-		_todos = model.todos;
-		_filter = model.filter;
-		render();
+		var result;
+		var model = db.getModel((res)=>{
+			console.log('recived response from server in controller: '+res);
+			result = res || {todos:[],filter:0};
+			_todos = result.todos;
+			_filter = result.filter;
+			render();
+		}); 
 	}
 
 	function filterTodos() {

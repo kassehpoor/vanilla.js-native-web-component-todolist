@@ -5,26 +5,23 @@ var db = (function () {
         setModel:setModelToServer,
     };
     
-    function getModelFromServer(callback){
+    function getModelFromServer(callBack){
         let url = '/read/';
         console.log('I am getModelFromServer function....');
         let xhr = new XMLHttpRequest();
-        xhr.open("GET",url,false);
         xhr.onreadystatechange = function (){
             var value;
-            
-            if (this.readyState == 4 && this.status == 200){
-                value = this.responseText;
-                value.forEeach((obj)=>{console.log(obj);});
-            };
-
-            xhr.send(null);
-            console.log('I want to read....');
-            if (!value) return callback(null);
-            callback(JSON.parse(value))
+            if (xhr.readyState == 4 && xhr.status == 200){
+                value = xhr.responseText;
+				console.log('I want to read.... ');
+				if (!value) callBack(null);
+				else callBack(JSON.parse(value)) ;
+            }
         };
+        xhr.open("GET",url);
+		xhr.send();
     };
-
+//************************************************************************
     function setModelToServer(value){
         let url = '/write/';
         let xhr = new XMLHttpRequest();
@@ -39,9 +36,6 @@ var db = (function () {
 
 
 
-getModelFromServer(function(value){
-    //use value
-})
 
 /*
 //---------------------------------------------------------
