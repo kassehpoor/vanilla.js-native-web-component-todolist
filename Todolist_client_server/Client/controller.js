@@ -47,6 +47,9 @@ var controller = (function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var data = xhr.responseText;
 				console.log('download result:', data);
+				if (!data) return alert('there is nothing on the server to download.');
+				var confirmResult = confirm('data on the local storage will be repaced!,are you sure to continue?');
+				if (!confirmResult) return;
 				db.setModel(JSON.parse(data));
 				init();
             }
