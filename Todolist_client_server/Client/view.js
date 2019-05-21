@@ -4,7 +4,8 @@ var view = (function () {
 	var todoText = document.getElementById("todoText");
 	var addButton = document.getElementById("addButton");
 	var todoListEl = document.getElementById('todoList');
-        
+	
+	
 	init();
 
 	return {
@@ -29,14 +30,16 @@ var view = (function () {
 			controller.addTodo(value);
 			todoText.value = '';
 		};
+		
 		downloadTodos.onclick =function (){controller.download()} ;
 		uploadTodos.onclick = function (){controller.upload()};
-		
 	}
 
 	function createLi(todo) {
 		var li = document.createElement('li');
+		li.className = 'li';
 		var titleSpan = document.createElement('span');
+		
 		titleSpan.textContent = todo.title;
 		titleSpan.className = todo.complete ? 'complete' : 'active';
 		li.appendChild(titleSpan);
@@ -50,7 +53,7 @@ var view = (function () {
 		var btnComplete = document.createElement('button');
 		var btnRemove = document.createElement('button');
 
-		btnComplete.textContent = todo.complete ? 'Complete' : 'Activate';
+		btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
 		btnRemove.textContent = 'X';
 
 		buttonsContainer.className = 'buttons-container';
@@ -62,4 +65,5 @@ var view = (function () {
 
 		return buttonsContainer;
 	}
+	
 }());
