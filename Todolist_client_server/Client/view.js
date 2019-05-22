@@ -20,7 +20,6 @@ var view = (function () {
 		todos.forEach(function (todo) {
 			todoListEl.appendChild(createLi(todo));
 		});
-		
 	}
 
 
@@ -35,6 +34,9 @@ var view = (function () {
 		};
 		downloadTodos.onclick =function (){controller.download()} ;
 		uploadTodos.onclick = function (){controller.upload()};
+		filterAllbtn.onclick = function (){render(controller.filterTodos())};
+		filterActivebtn.onclick = function (){render(controller.filterTodos())};
+		filterCompletebtn.onclick = function (){render(controller.filterTodos())};
 	}
 
 	function createLi(todo) {
@@ -67,9 +69,5 @@ var view = (function () {
 
 		return buttonsContainer;
 	}
-
-	function filterSelection(todo){
-				
-	}
-	
+		
 }());
