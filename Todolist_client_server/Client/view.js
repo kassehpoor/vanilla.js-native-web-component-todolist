@@ -4,6 +4,9 @@ var view = (function () {
 	var todoText = document.getElementById("todoText");
 	var addButton = document.getElementById("addButton");
 	var todoListEl = document.getElementById('todoList');
+	var filterAllbtn =  document.getElementById('filterAll');
+	var filterActivebtn =  document.getElementById('filterActive');
+	var filterCompletebtn =  document.getElementById('filterComplete');
 	
 	
 	init();
@@ -30,7 +33,6 @@ var view = (function () {
 			controller.addTodo(value);
 			todoText.value = '';
 		};
-		
 		downloadTodos.onclick =function (){controller.download()} ;
 		uploadTodos.onclick = function (){controller.upload()};
 	}
@@ -52,7 +54,7 @@ var view = (function () {
 		var buttonsContainer = document.createElement('div');
 		var btnComplete = document.createElement('button');
 		var btnRemove = document.createElement('button');
-
+	
 		btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
 		btnRemove.textContent = 'X';
 
@@ -64,6 +66,10 @@ var view = (function () {
 		btnRemove.onclick = function () { controller.remove(todo) };
 
 		return buttonsContainer;
+	}
+
+	function filterSelection(todo){
+				
 	}
 	
 }());

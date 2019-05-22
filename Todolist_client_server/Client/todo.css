@@ -21,11 +21,41 @@
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    border-radius: 50%;
+    border-radius:8px;;
     
 }
 .serverbtns {
-    background-color: rgb(97, 116, 179); 
+  background-color: rgb(234, 240, 178); 
+  -webkit-text-fill-color: black;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;;
+}
+
+.addremove {
+  background-color: rgb(207, 230, 217);
+  -webkit-text-fill-color: black; 
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;;
+}
+.delbtn {
+  background-color: rgb(207, 230, 217);
+  -webkit-text-fill-color: black; 
   border: none;
   color: white;
   padding: 20px;
@@ -37,8 +67,7 @@
   cursor: pointer;
   border-radius: 50%;
 }
-
-.addremove {
+.togbtn {
     background-color: rgb(207, 230, 217); 
   border: none;
   color: white;
@@ -88,4 +117,12 @@ h1 {
     justify-content: space-between;
     align-items: center;
     border-bottom: solid 1px #cccccc;
+}
+.filters {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    right: 0;
+    left: 0;
 }

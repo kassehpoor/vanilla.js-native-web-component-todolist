@@ -13,19 +13,23 @@
 <main>
     <div>
         <div>
-            
-                <input type="text" placeholder="Enter your task..." id="todoText">
-                <input class="addremove" type="button" value="Add"   id = "addButton"  >
-                <input class="addremove" type="button" value="X All" id = "deleteButton" >
-          
+            <input type="text" placeholder="Enter your task..." id="todoText">
+            <input class="addremove" type="button" value="Add"   id = "addButton"  >
+            <input class="addremove" type="button" value="X All" id = "deleteButton" >
             <span >
                 <input class ="serverbtns" type ="button"  value ="Download" id ="DownloadButton">
                 <input class ="serverbtns" type = "button" value ="Upload"   id ="UplodButton">
             </span>
-
         </div>
         <div>
             <ul id="todoList">
+            </ul>
+        </div>
+        <div>
+            <ul class="filters">
+                <input class="filters" type="button" value="All"   id = "filterAll"  >
+                <input class="filters" type="button" value="Active"   id = "filterActive"  >
+                <input class="filters" type="button" value="Complete"   id = "filterComplete"  >
             </ul>
         </div>
     </div>
