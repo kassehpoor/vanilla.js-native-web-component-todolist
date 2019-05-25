@@ -1,7 +1,7 @@
 var http = require('http');
 var requestHandler = require('./request-handler.js').requestHnadler;
 
-const port = 9090;
+const port = 5050;
 
 
 var server = http.createServer(requestHandler);

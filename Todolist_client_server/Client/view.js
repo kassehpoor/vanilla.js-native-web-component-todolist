@@ -65,11 +65,13 @@ var view = (function () {
 		var buttonsContainer = document.createElement('div');
 		var btnComplete = document.createElement('button');
 		var btnRemove = document.createElement('button');
+		btnComplete.setAttribute("class", "togbtn");
+		btnRemove.setAttribute("class", "delbtn");
+		
 			
 		btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
 		btnRemove.textContent = 'X';
 
-		buttonsContainer.className = 'buttons-container';
 		buttonsContainer.appendChild(btnComplete);
 		buttonsContainer.appendChild(btnRemove);
 
