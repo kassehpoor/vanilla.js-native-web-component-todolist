@@ -9,21 +9,6 @@
     color: black;
 }
 
-.buttons-container {
-   
-    background-color: rgb(207, 230, 217); 
-    border: none;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius:8px;;
-    
-}
 .serverbtns {
   background-color: rgb(234, 240, 178); 
   -webkit-text-fill-color: black;
@@ -54,7 +39,21 @@
   border-radius: 8px;;
 }
 .delbtn {
-  background-color: rgb(207, 230, 217);
+  background-color: #f1eded;
+  -webkit-text-fill-color: red; 
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.togbtn {
+  background-color:  #f1eded;
   -webkit-text-fill-color: black; 
   border: none;
   color: white;
@@ -65,20 +64,7 @@
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 50%;
-}
-.togbtn {
-    background-color: rgb(207, 230, 217); 
-  border: none;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 50%;
+  border-radius: 8px;
 }
 
 body {
@@ -124,8 +110,9 @@ h1 {
     border-bottom: solid 1px #cccccc;
 }
 .filters {
-    background-color: #cccccc;
-    color: #777;
+    background-color: #f7e4e4;
+    color: rgb(19, 17, 17);
+    text-emphasis-color: black;
     margin: 3px;
     padding: 3px 7px;
     text-decoration: none;
