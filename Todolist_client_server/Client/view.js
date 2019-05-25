@@ -1,18 +1,16 @@
 var view = (function () {
-	var downloadTodos = document.getElementById("DownloadButton");
-	var uploadTodos =document.getElementById("UplodButton");
-	var todoText = document.getElementById("todoText");
-	var addButton = document.getElementById("addButton");
+	var todoInput = document.getElementById("todoText");
 	var todoListEl = document.getElementById('todoList');
-	var filterAllbtn =  document.getElementById('filterAll');
-	var filterActivebtn =  document.getElementById('filterActive');
-	var filterCompletebtn =  document.getElementById('filterComplete');
-	
 	
 	init();
 
 	return {
-		render: render
+		render: render,
+		add: add,
+		deleteAll: deleteAll,
+		filter: filter,
+		download :download,
+		upload : upload,
 	};
 
 	function render(todos) {
@@ -22,21 +20,32 @@ var view = (function () {
 		});
 	}
 
+	function filter(value) {
+		controller.filterTodos(value);
+	}
+
+	function add() {
+		var value = todoInput.value;
+		if (!value) return;
+		controller.addTodo(value);
+		todoInput.value = '';
+	}
+
+	function deleteAll() {
+		controller.removeAllTodos();
+	}
+	function download () {
+		controller.download();
+	}
+
+	function upload () {
+		controller.upload();
+	}
 
 	// ====================================================================
 
 	function init() {
-		addButton.onclick = function () {
-			var value = todoText.value;
-			if (!value) return;
-			controller.addTodo(value);
-			todoText.value = '';
-		};
-		downloadTodos.onclick =function (){controller.download()} ;
-		uploadTodos.onclick = function (){controller.upload()};
-		filterAllbtn.onclick = function (){render(controller.filterTodos())};
-		filterActivebtn.onclick = function (){render(controller.filterTodos())};
-		filterCompletebtn.onclick = function (){render(controller.filterTodos())};
+	
 	}
 
 	function createLi(todo) {
@@ -56,7 +65,7 @@ var view = (function () {
 		var buttonsContainer = document.createElement('div');
 		var btnComplete = document.createElement('button');
 		var btnRemove = document.createElement('button');
-	
+			
 		btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
 		btnRemove.textContent = 'X';
 

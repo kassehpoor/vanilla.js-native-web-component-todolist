@@ -103,10 +103,15 @@ h1 {
 
 }
 #todoText {
-    border-radius: 5px;
-    border: solid 1px #cccccc;
-    padding: 5px 8px;
-    border-bottom: solid 1px #cccccc;
+  
+  display: flex;
+  margin: 3px;
+  padding: 3px 7px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background-color: transparent;
+  border-bottom: solid 1px #cccccc;
     
 }
 
@@ -119,10 +124,13 @@ h1 {
     border-bottom: solid 1px #cccccc;
 }
 .filters {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    position: absolute;
-    right: 0;
-    left: 0;
+    background-color: #cccccc;
+    color: #777;
+    margin: 3px;
+    padding: 3px 7px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    
+    
 }

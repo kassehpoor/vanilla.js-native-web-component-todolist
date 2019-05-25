@@ -13,12 +13,13 @@
 <main>
     <div>
         <div>
-            <input type="text" placeholder="Enter your task..." id="todoText">
-            <input class="addremove" type="button" value="Add"   id = "addButton"  >
-            <input class="addremove" type="button" value="X All" id = "deleteButton" >
+            <input type="text" placeholder="Enter your task..."  id="todoText">
+            <br></br>
+            <input class="addremove" type="button" value="Add" id="addButton" onclick="view.add()">
+            <input class="addremove" type="button" value="X All" id = "deleteButton" onclick="view.deleteAll()">
             <span >
-                <input class ="serverbtns" type ="button"  value ="Download" id ="DownloadButton">
-                <input class ="serverbtns" type = "button" value ="Upload"   id ="UplodButton">
+                <input class ="serverbtns" type ="button"  value ="Download" id ="DownloadButton" onclick="view.download()" >
+                <input class ="serverbtns" type = "button" value ="Upload"   id ="UplodButton" onclick="view.upload()" >
             </span>
         </div>
         <div>
@@ -28,9 +29,9 @@
        </div>
        <div>
         <ul >
-            <input  type="button" value="All"   id = "filterAll"  >
-            <input  type="button" value="Active"   id = "filterActive"  >
-            <input  type="button" value="Complete"   id = "filterComplete"  >
+            <input class="filters" type="button" value="All"   id = "filterAll" onclick="view.filter(0)" >
+            <input class="filters" type="button" value="Active"   id = "filterActive" onclick="view.filter(1)"  >
+            <input class="filters" type="button" value="Complete"   id = "filterComplete" onclick="view.filter(2)"  >
         </ul>
     </div>
 </main>

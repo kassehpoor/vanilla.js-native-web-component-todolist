@@ -12,11 +12,10 @@ var controller = (function () {
 		setFilter: setFilter,
 		download :download,
 		upload : upload,
+		filterTodos :filterTodos,
 	};
 
 	function addTodo(value) {
-		console.log(value)
-		if (!value) return;
 		_todos.push({ title: value, complete: false });
 		render();
 	}
@@ -77,6 +76,11 @@ var controller = (function () {
 		
 	}
 
+	function filterTodos(value) {
+		_filter = value || 0;
+		render();
+	}
+
 
 	// ================================================================
 
@@ -87,17 +91,19 @@ var controller = (function () {
 		render();
 	}
 
-	function filterTodos() {
-		return (_filter === 0
-			? _todos
-			: _todos.filter(function (t) {
-				return _filter === 1 ? !t.complete : t.complete;
-			}));
-	}
-
 	function render() {
 		db.setModel({ todos: _todos, filter: _filter });
-		view.render(filterTodos());
+		view.render(getFilteredTodos());
+	}
+
+	function getFilteredTodos() {
+		//filter ----> 0:all   1:active   2:complete
+		if (!_filter) {
+			return _todos;
+		}
+		return _todos.filter(function (t) {
+			return (_filter === 1) ? !t.complete : t.complete;
+		});
 	}
  
 })();

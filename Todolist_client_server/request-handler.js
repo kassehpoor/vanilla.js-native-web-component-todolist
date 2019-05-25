@@ -63,11 +63,10 @@ exports.requestHnadler = function requestHnadler(req, res) {
 	}
 
 	function staticFileHandler(req, res) {
-		//todo: check file exist...
 		fs.readFile('./Client/' + req.url, function (err, data) {
 			if (err) {
 				res.writeHead(500);
-				console.error(err);
+				console.error(err+'problem.............');
 				res.end('error');
 			} else {
 				res.writeHead(200);
