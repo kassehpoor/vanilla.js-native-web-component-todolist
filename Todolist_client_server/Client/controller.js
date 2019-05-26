@@ -53,8 +53,15 @@ var controller = (function () {
 	}
 
 	function upload() {
-		connection.upload();
-		
+		var data =  db.getModel();
+        if (!data) return alert('there is nothing to upload.');
+        var confirmResult = confirm('data on the server will be replaced!, are you sure to continue?');
+        if (!confirmResult) return;
+		connection.upload(data, function() {
+			alert('upload done successfully.');
+		},function () {
+			alert('upload failed ,because of the server problem.');
+		});
 	}
 
 	function filterTodos(value) {
