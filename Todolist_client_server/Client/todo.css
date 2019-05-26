@@ -12,40 +12,40 @@
 .serverbtns {
   background-color: rgb(234, 240, 178); 
   -webkit-text-fill-color: black;
-  border: none;
   color: white;
-  padding: 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 8px;;
 }
 
 .addremove {
   background-color: rgb(207, 230, 217);
   -webkit-text-fill-color: black; 
-  border: none;
   color: white;
-  padding: 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 8px;;
 }
 
-.control-div > div > input {
+.control-div__first-div > input {
   font-size: 25px;
   width: 100%;
 }
 
 .control-div > div {
   margin: 20px 0px;
+}
+
+.control-div__second-div > input {
+  padding: 5px;
+  font-size: 16px;
+  width: 15%;
+  border-radius: 8px;
+  border: rgb(201, 197, 197) 2px solid;
 }
 
 .delbtn {
