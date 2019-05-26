@@ -57,7 +57,6 @@
   text-align: center;
   text-decoration: none;
   display: inline;
-  /* font-size: 16px; */
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 8px;
@@ -72,14 +71,12 @@
   text-align: center;
   text-decoration: none;
   display: inline;
-  /* font-size: 16px; */
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 8px;
 }
 
 body {
-    /* font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif; */
     font-family: sans-serif;
     line-height: 1.4em;
     background: #f5f5f5;
@@ -130,6 +127,5 @@ h1 {
     text-decoration: none;
     border: 1px solid transparent;
     border-radius: 3px;
-    
     
 }
