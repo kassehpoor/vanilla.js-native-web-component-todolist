@@ -1,7 +1,35 @@
 var fs = require('fs');
+var auth = require('basic-auth');
+var compare = require('tsscmp');
 
 exports.requestHnadler = function requestHnadler(req, res) {
 	console.log(req.method, req.url);
+//***************************************************************
+	var credentials = auth(req);
+
+	//check credentials
+	//The "check" function will typically be against your user store
+	if (req.headers.authorization) !== '' &&){}
+
+	if (!credential || !check(credentials.name,credentials.pass)) {
+		res.statusCode = 401;
+		res.setHeader('WWW-Authenticate', 'Basic realm="example"');
+        res.end('Access denied');
+      } else {
+        res.end('Access granted');
+      }
+
+	  //Basic function to validate credentials for example
+	  function check (name, pass) {
+		  var valid = true;
+
+		  //simple method to prevent short-circut and use timing-safe compare
+		  valid = compare(name, 'tahereh') && valid;
+		  valid = compare (pass, 'kasehpoor') && valid;
+
+		  return valid;
+	  }
+//***************************************************************
 
 	var routeHandler = ({
 		'GET': {

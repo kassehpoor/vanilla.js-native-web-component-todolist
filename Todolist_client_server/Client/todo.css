@@ -129,3 +129,18 @@ h1 {
     border-radius: 3px;
  
  }
+
+ .show {
+   display :block;
+ }
+ .hidden {
+  display :none;
+ }
+
+ .app {
+  display :none;
+ }
+
+ .login-page {
+  display :block
+ }

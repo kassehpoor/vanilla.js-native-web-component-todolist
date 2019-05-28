@@ -1,7 +1,19 @@
 var controller = (function () {
 	var _todos = [];
 	var _filter = 0; // 0:all   1:active   2:complete
-	
+/*
+	{"todos":[
+		{"title":"salam1","complete":false},
+		{"title":"salam2","complete":false}
+	],
+		"filter":0}
+*/
+/*
+var model = {
+	1:{todos:[], filter:0},
+	2:{todos:[], filter:0}
+  }
+*/
 	init();
 
 	return {
@@ -13,6 +25,7 @@ var controller = (function () {
 		download :download,
 		upload : upload,
 		filterTodos :filterTodos,
+		login : login,
 	};
 
 	function addTodo(value) {
@@ -61,6 +74,14 @@ var controller = (function () {
 			alert('upload done successfully.');
 		},function () {
 			alert('upload failed ,because of the server problem.');
+		});
+	}
+
+	function login () {
+		connection.getToken(function (isAuthorized){
+			if (isAuthorized) {view.showApp()};
+		},function () {
+			alert ('you are not authorized.');
 		});
 	}
 

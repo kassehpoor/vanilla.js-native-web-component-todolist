@@ -11,6 +11,8 @@ var view = (function () {
 		filter: filter,
 		download :download,
 		upload : upload,
+		login : login,
+		showApp : showApp,
 	};
 
 	function render(todos) {
@@ -41,6 +43,17 @@ var view = (function () {
 	function upload () {
 		controller.upload();
 	}
+
+	function login (){
+		controller.login();
+	}
+
+	function showApp () {
+		const showDiv = document.querySelector ('.app');
+		showDiv.classList.replace ('app','show');
+		const hideDive = document.querySelector ('.login-page');
+		hideDive.classList.replace ('login-page','hidden');
+	}; 
 
 	// ====================================================================
 

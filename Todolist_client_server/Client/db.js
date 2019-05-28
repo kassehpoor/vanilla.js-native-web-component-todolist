@@ -16,8 +16,7 @@ var db = (function () {
         !value && (value = {});
         localStorage.setItem(key, JSON.stringify(value));
     };
-    
-
+  
 }())
 
  

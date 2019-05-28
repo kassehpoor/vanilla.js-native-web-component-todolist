@@ -13,27 +13,41 @@
         <h1>todos</h1>
     </header>
     <main>
-        <div class="control-div">
-            <div class="control-div__first-div">
-                <input type="text" placeholder="Enter your task..." id="todoText">
-            </div>
-            <div class="control-div__second-div">
-                <input class="addremove" type="button" value="Add" id="addButton" onclick="view.add()">
-                <input class="addremove" type="button" value="X All" id="deleteButton" onclick="view.deleteAll()">
-                <input class="serverbtns" type="button" value="Download" id="DownloadButton" onclick="view.download()">
-                <input class="serverbtns" type="button" value="Upload" id="UplodButton" onclick="view.upload()">
+        <div  class= "app">
+            <div class="control-div">
+                <div class="control-div__first-div">
+                    <input type="text" placeholder="Enter your task..." id="todoText">
+                </div>
+                <div class="control-div__second-div">
+                    <input class="addremove" type="button" value="Add" id="addButton" onclick="view.add()">
+                    <input class="addremove" type="button" value="X All" id="deleteButton" onclick="view.deleteAll()">
+                    <input class="serverbtns" type="button" value="Download" id="DownloadButton" onclick="view.download()">
+                    <input class="serverbtns" type="button" value="Upload" id="UplodButton" onclick="view.upload()">
+                </div>
+                <div>
+                    <ul id="todoList">
+                    </ul>
+                </div>
             </div>
             <div>
-                <ul id="todoList">
+                <ul>
+                    <input class="filters" type="button" value="All" id="filterAll" onclick="view.filter(0)">
+                    <input class="filters" type="button" value="Active" id="filterActive" onclick="view.filter(1)">
+                    <input class="filters" type="button" value="Complete" id="filterComplete" onclick="view.filter(2)">
                 </ul>
             </div>
         </div>
-        <div>
-            <ul>
-                <input class="filters" type="button" value="All" id="filterAll" onclick="view.filter(0)">
-                <input class="filters" type="button" value="Active" id="filterActive" onclick="view.filter(1)">
-                <input class="filters" type="button" value="Complete" id="filterComplete" onclick="view.filter(2)">
-            </ul>
+
+        <div class="login-page" style="display:none">
+                <div>
+                        <span>username:</span><input />
+                </div>
+                <div>
+                        <span>password:</span><input />
+                </div>
+                <div>
+                        <input type="button" value="Login" onclick ="view.login()"/>
+                </div>
         </div>
     </main>
     <script src="db.js"></script>

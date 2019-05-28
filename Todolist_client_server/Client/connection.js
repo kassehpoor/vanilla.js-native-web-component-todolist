@@ -2,9 +2,34 @@
 var connection = (function (){
     return {
         download :download,
-		upload : upload, 
+        upload : upload,
+        getToken : getToken, 
 
     };
+    var token_;
+    function getToken (cb, err) {
+        var isAuthorized = false;  
+        var xhr = new XMLHttpRequest(); 
+   
+    xhr.open("POST", url, true); 
+    xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('jwtoken'));
+    xhr.send(); // specify the credentials to receive the token on request
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                var response  = xhr.responseText;
+                var data = JSON.parse(response);
+                token_ = data.access_token;
+                token_ &&  !isAuthorized ;
+                cb && cb(isAuthorized);
+            } else {
+                cb (isAuthorized);
+                err && err();
+            }
+        }
+    };
+ }
+
     function download(cb, err) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
