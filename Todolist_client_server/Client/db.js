@@ -1,9 +1,11 @@
 var db = (function () {
     var key = 'MODEL';
-    
+        
     return {
         getModel:getModelFromLocalStorage,
-        setModel:setModelToLocalStorage
+        setModel:setModelToLocalStorage,
+        setToken:setTokenToLocalStorage,
+        getToken:getTokenFromLocalStorage,
     };
 
       function getModelFromLocalStorage() {
@@ -16,7 +18,18 @@ var db = (function () {
         !value && (value = {});
         localStorage.setItem(key, JSON.stringify(value));
     };
-  
+    
+    function getTokenFromLocalStorage () {
+        var token = localStorage.getItem('Token');
+        if (!token) return null;
+        return token;
+    }
+
+    function setTokenToLocalStorage (token) {
+        !token && (token = {});
+        localStorage.setItem('Token', JSON.stringify(token));
+    }
+
 }())
 
  

@@ -17,10 +17,12 @@ var connection = (function () {
     }
 
     function download(cb, err) {
+        var token = db.getToken();
         http.get('read', [], cb, err);
     }
 
     function upload(data, cb, err) {
+        var token = db.getToken();
         http.post('write', data, { name: 'Content-Type', value: 'application/json' }, cb, err);
     }
 
