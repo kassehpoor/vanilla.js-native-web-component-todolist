@@ -4,6 +4,8 @@ var view = (function () {
 	var appPage = document.getElementById('app');
 	var loginPage = document.getElementById('login-page');
 	var btnSignin = document.getElementById('btnSignin');
+	var usernameInput = document.getElementById('userLogin');
+	var passwordInput = document.getElementById('passLogin');
 
 	init();
 
@@ -49,7 +51,12 @@ var view = (function () {
 	}
 
 	function login() {
-		controller.login();
+		var username = usernameInput.value;  
+		var password = passwordInput.value; 
+		if (!username || !password) return;
+		controller.login(username, password);
+		usernameInput.value = ''; 
+		passwordInput.value = '';
 	}
 	function showLoginPage() {
 		loginPage.setAttribute('style','display:block');
@@ -58,12 +65,6 @@ var view = (function () {
 
 	function showApp() {
 		appPage.setAttribute('style','display:block');
-		/*
-		const showDiv = document.querySelector('.app');
-		showDiv.classList.replace('app', 'show');
-		const hideDive = document.querySelector('.login-page');
-		hideDive.classList.replace('login-page', 'hidden');
-		*/
 	};
 
 	// ====================================================================
