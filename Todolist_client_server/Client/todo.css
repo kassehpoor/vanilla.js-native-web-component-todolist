@@ -1,3 +1,52 @@
+/************************login page*******************/
+
+.btnSignin {
+  background-color: rgb(234, 240, 178);
+  -webkit-text-fill-color: black; 
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  float :right;
+}
+
+.userLogin {
+  display: flex;
+  margin: 3px;
+  padding: 3px 7px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background-color: transparent;
+  border-bottom: solid 1px #cccccc;
+}
+
+.passLogin {
+  display: flex;
+  margin: 3px;
+  padding: 3px 7px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background-color: transparent;
+  border-bottom: solid 1px #cccccc;
+}
+
+.btnLogin {
+  background-color: rgb(207, 230, 217);
+  -webkit-text-fill-color: black; 
+  margin: 10px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+/************************app page*******************/
 .complete {
     text-decoration: line-through;
     font-style: italic;
@@ -130,17 +179,3 @@ h1 {
  
  }
 
- .show {
-   display :block;
- }
- .hidden {
-  display :none;
- }
-
- .app {
-  display :none;
- }
-
- .login-page {
-  display :block
- }

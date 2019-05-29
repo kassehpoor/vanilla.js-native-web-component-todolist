@@ -5,6 +5,7 @@ var compare = require('tsscmp');
 exports.requestHnadler = function requestHnadler(req, res) {
 	console.log(req.method, req.url);
 //***************************************************************
+/*
 	var credentials = auth(req);
 
 	//check credentials
@@ -28,7 +29,8 @@ exports.requestHnadler = function requestHnadler(req, res) {
 		  valid = compare (pass, 'kasehpoor') && valid;
 
 		  return valid;
-	  }
+		}
+		*/
 //***************************************************************
 
 	var routeHandler = ({

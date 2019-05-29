@@ -1,19 +1,19 @@
 var controller = (function () {
 	var _todos = [];
 	var _filter = 0; // 0:all   1:active   2:complete
-/*
-	{"todos":[
-		{"title":"salam1","complete":false},
-		{"title":"salam2","complete":false}
-	],
-		"filter":0}
-*/
-/*
-var model = {
-	1:{todos:[], filter:0},
-	2:{todos:[], filter:0}
-  }
-*/
+	/*
+		{"todos":[
+			{"title":"salam1","complete":false},
+			{"title":"salam2","complete":false}
+		],
+			"filter":0}
+	*/
+	/*
+	var model = {
+		1:{todos:[], filter:0},
+		2:{todos:[], filter:0}
+		}
+	*/
 	init();
 
 	return {
@@ -22,10 +22,10 @@ var model = {
 		removeAllTodos: removeAllTodos,
 		remove: remove,
 		setFilter: setFilter,
-		download :download,
-		upload : upload,
-		filterTodos :filterTodos,
-		login : login,
+		download: download,
+		upload: upload,
+		filterTodos: filterTodos,
+		login: login,
 	};
 
 	function addTodo(value) {
@@ -66,22 +66,25 @@ var model = {
 	}
 
 	function upload() {
-		var data =  db.getModel();
-        if (!data) return alert('there is nothing to upload.');
-        var confirmResult = confirm('data on the server will be replaced!, are you sure to continue?');
-        if (!confirmResult) return;
-		connection.upload(data, function() {
+		var data = db.getModel();
+		if (!data) return alert('there is nothing to upload.');
+		var confirmResult = confirm('data on the server will be replaced!, are you sure to continue?');
+		if (!confirmResult) return;
+		connection.upload(data, function () {
 			alert('upload done successfully.');
-		},function () {
+		}, function () {
 			alert('upload failed ,because of the server problem.');
 		});
 	}
 
-	function login () {
-		connection.getToken(function (isAuthorized){
-			if (isAuthorized) {view.showApp()};
-		},function () {
-			alert ('you are not authorized.');
+	function login(username, password) {
+		connection.authenticate(username, password, function (result) {
+			if (!result) {
+				return alert('authentication failed.');
+			}
+			view.showApp();
+		}, function (err) {
+			alert('Error: ' + err);
 		});
 	}
 
@@ -114,5 +117,5 @@ var model = {
 			return (_filter === 1) ? !t.complete : t.complete;
 		});
 	}
- 
+
 })();

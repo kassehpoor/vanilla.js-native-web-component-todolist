@@ -1,7 +1,10 @@
 var view = (function () {
 	var todoInput = document.getElementById("todoText");
 	var todoListEl = document.getElementById('todoList');
-	
+	var appPage = document.getElementById('app');
+	var loginPage = document.getElementById('login-page');
+	var btnSignin = document.getElementById('btnSignin');
+
 	init();
 
 	return {
@@ -9,10 +12,11 @@ var view = (function () {
 		add: add,
 		deleteAll: deleteAll,
 		filter: filter,
-		download :download,
-		upload : upload,
-		login : login,
-		showApp : showApp,
+		download: download,
+		upload: upload,
+		login: login,
+		showApp: showApp,
+		showLoginPage :showLoginPage,
 	};
 
 	function render(todos) {
@@ -36,36 +40,43 @@ var view = (function () {
 	function deleteAll() {
 		controller.removeAllTodos();
 	}
-	function download () {
+	function download() {
 		controller.download();
 	}
 
-	function upload () {
+	function upload() {
 		controller.upload();
 	}
 
-	function login (){
+	function login() {
 		controller.login();
 	}
+	function showLoginPage() {
+		loginPage.setAttribute('style','display:block');
+		btnSignin.setAttribute('style','display:none');
+	}
 
-	function showApp () {
-		const showDiv = document.querySelector ('.app');
-		showDiv.classList.replace ('app','show');
-		const hideDive = document.querySelector ('.login-page');
-		hideDive.classList.replace ('login-page','hidden');
-	}; 
+	function showApp() {
+		appPage.setAttribute('style','display:block');
+		/*
+		const showDiv = document.querySelector('.app');
+		showDiv.classList.replace('app', 'show');
+		const hideDive = document.querySelector('.login-page');
+		hideDive.classList.replace('login-page', 'hidden');
+		*/
+	};
 
 	// ====================================================================
 
 	function init() {
-	
+
 	}
 
 	function createLi(todo) {
 		var li = document.createElement('li');
 		li.className = 'li';
 		var titleSpan = document.createElement('span');
-		
+
 		titleSpan.textContent = todo.title;
 		titleSpan.className = todo.complete ? 'complete' : 'active';
 		li.appendChild(titleSpan);
@@ -80,8 +91,8 @@ var view = (function () {
 		var btnRemove = document.createElement('button');
 		btnComplete.setAttribute("class", "togbtn");
 		btnRemove.setAttribute("class", "delbtn");
-		
-			
+
+
 		btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
 		btnRemove.textContent = 'X';
 
@@ -93,5 +104,5 @@ var view = (function () {
 
 		return buttonsContainer;
 	}
-		
+
 }());
