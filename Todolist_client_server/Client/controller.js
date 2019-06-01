@@ -78,11 +78,11 @@ var controller = (function () {
 	}
 
 	function login(username, password) {
-		connection.authenticate(username, password, function (result) {
-			if (!result) {
+		connection.authenticate(username, password, function (user) {
+			if (!user) {
 				return alert('authentication failed.');
 			}
-			view.showApp();
+			view.showApp(user);
 		}, function (err) {
 			alert('Error: ' + err);
 		});
@@ -97,6 +97,10 @@ var controller = (function () {
 	// ================================================================
 
 	function init() {
+		connection.init();
+		var user = db.getUser();
+		view.showApp(user);
+
 		var model = db.getModel() || { todos: [], filter: 0 };
 		_todos = model.todos;
 		_filter = model.filter;

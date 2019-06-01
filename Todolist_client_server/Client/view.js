@@ -4,8 +4,10 @@ var view = (function () {
 	var appPage = document.getElementById('app');
 	var loginPage = document.getElementById('login-page');
 	var btnSignin = document.getElementById('btnSignin');
+	var spnUserDisplayName = document.getElementById('spnUserDisplayName');
 	var usernameInput = document.getElementById('userLogin');
 	var passwordInput = document.getElementById('passLogin');
+	var btnSignout = document.getElementById('btnSignout');
 
 	init();
 
@@ -18,7 +20,9 @@ var view = (function () {
 		upload: upload,
 		login: login,
 		showApp: showApp,
-		showLoginPage :showLoginPage,
+		showLoginPage: showLoginPage,
+		logoff: logoff,
+		cancelLogin: cancelLogin
 	};
 
 	function render(todos) {
@@ -51,21 +55,43 @@ var view = (function () {
 	}
 
 	function login() {
-		var username = usernameInput.value;  
-		var password = passwordInput.value; 
+		var username = usernameInput.value;
+		var password = passwordInput.value;
 		if (!username || !password) return;
+
 		controller.login(username, password);
-		usernameInput.value = ''; 
+		usernameInput.value = '';
 		passwordInput.value = '';
 	}
 	function showLoginPage() {
-		loginPage.setAttribute('style','display:block');
-		btnSignin.setAttribute('style','display:none');
+		appPage.style.display = 'none';
+		spnUserDisplayName.style.display = 'none';
+		loginPage.style.display = 'block';
+		btnSignin.style.display = 'none';
 	}
 
-	function showApp() {
-		appPage.setAttribute('style','display:block');
+	function showApp(user) {
+		loginPage.style.display = 'none';
+		appPage.style.display = 'block';
+
+		if (user) {
+			btnSignin.style.display = 'none';
+			spnUserDisplayName.style.display = 'inline-block';
+			btnSignout.style.display = 'inline-block';
+			spnUserDisplayName.textContent = user.firstName + ' ' + user.lastName;
+		} else {
+			btnSignin.style.display = 'block';
+		}
+
 	};
+
+	function logoff() {
+		controller.logoff();
+	}
+
+	function cancelLogin() {
+		showApp();
+	}
 
 	// ====================================================================
 

@@ -41,7 +41,8 @@ var http = (function () {
         _defaultHeaders.forEach(function (h) {
             xhr.setRequestHeader(h.name, h.value);
         });
-        headers.forEach(function (h) {
+        
+        (headers || []).forEach(function (h) {
             xhr.setRequestHeader(h.name, h.value);
         });
         xhr.send(data);
