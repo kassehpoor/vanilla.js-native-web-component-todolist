@@ -6,7 +6,7 @@ var http = (function () {
         get: get,
         post: post,
 
-        addDefaultHeader: addDefaultHeader
+        setDefaultHeader: addDefaultHeader
     };
 
     // =====================================================================
