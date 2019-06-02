@@ -68,19 +68,22 @@ var view = (function () {
 		spnUserDisplayName.style.display = 'none';
 		loginPage.style.display = 'block';
 		btnSignin.style.display = 'none';
+		btnSignout.style.display = 'none';
 	}
 
 	function showApp(user) {
 		loginPage.style.display = 'none';
 		appPage.style.display = 'block';
+		spnUserDisplayName.style.display = 'inline-block';
 
 		if (user) {
 			btnSignin.style.display = 'none';
-			spnUserDisplayName.style.display = 'inline-block';
 			btnSignout.style.display = 'inline-block';
 			spnUserDisplayName.textContent = user.firstName + ' ' + user.lastName;
 		} else {
 			btnSignin.style.display = 'block';
+			btnSignout.style.display = 'none';
+			spnUserDisplayName.textContent = 'anonymous user';
 		}
 
 	};

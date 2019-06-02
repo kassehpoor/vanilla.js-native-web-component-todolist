@@ -26,6 +26,7 @@ var controller = (function () {
 		upload: upload,
 		filterTodos: filterTodos,
 		login: login,
+		logoff: logoff
 	};
 
 	function addTodo(value) {
@@ -82,10 +83,17 @@ var controller = (function () {
 			if (!user) {
 				return alert('authentication failed.');
 			}
+			db.setUser(user);
 			view.showApp(user);
 		}, function (err) {
 			alert('Error: ' + err);
 		});
+	}
+
+	function logoff() {
+		connection.setTokenHeader();
+		db.setUser();
+		view.showApp();
 	}
 
 	function filterTodos(value) {

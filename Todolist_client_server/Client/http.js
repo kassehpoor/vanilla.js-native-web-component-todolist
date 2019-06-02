@@ -6,7 +6,7 @@ var http = (function () {
         get: get,
         post: post,
 
-        setDefaultHeader: addDefaultHeader
+        setDefaultHeader: setDefaultHeader
     };
 
     // =====================================================================
@@ -19,8 +19,13 @@ var http = (function () {
         xhr('POST', url, data, headers, cb, err);
     }
 
-    function addDefaultHeader(name, value) {
-        _defaultHeaders.push({ 'name': name, 'value': value });
+    function setDefaultHeader(name, value) {
+        var header = _defaultHeaders.find(h => h.name === name);
+        if (header) {
+            header.value = value;
+        } else {
+            _defaultHeaders.push({ 'name': name, 'value': value });
+        }
     }
 
     // =====================================================================
@@ -39,9 +44,10 @@ var http = (function () {
         };
         xhr.open(method, url, true);
         _defaultHeaders.forEach(function (h) {
+            if (h.value === undefined || h.value === null) return;
             xhr.setRequestHeader(h.name, h.value);
         });
-        
+
         (headers || []).forEach(function (h) {
             xhr.setRequestHeader(h.name, h.value);
         });

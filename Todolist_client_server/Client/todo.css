@@ -1,6 +1,6 @@
 /************************login page*******************/
 
-.btnSignin {
+.btn-Signin-Signout {
   background-color: rgb(234, 240, 178);
   -webkit-text-fill-color: black; 
   color: white;
@@ -11,6 +11,17 @@
   cursor: pointer;
   float :right;
 }
+
+.btn-Cancel {
+  background-color: rgb(234, 240, 178);
+  -webkit-text-fill-color: black; 
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+ }
 
 .userLogin {
   display: flex;

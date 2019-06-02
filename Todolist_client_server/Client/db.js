@@ -30,9 +30,12 @@ var db = (function () {
     }
 
     function setTokenToLocalStorage(token) {
+        if (!token) {
+            return localStorage.removeItem(TOKEN_KEY);
+        }
         localStorage.setItem(TOKEN_KEY, token);
     }
-    
+
     function getUserFromLocalStorage() {
         var user = localStorage.getItem(USER_KEY);
         if (!user) return null;
@@ -40,7 +43,9 @@ var db = (function () {
     }
 
     function setUserToLocalStorage(user) {
-        !user && (user = {});
+        if (!user) {
+            return localStorage.removeItem(USER_KEY);
+        }
         localStorage.setItem(USER_KEY, JSON.stringify(user));
     }
 

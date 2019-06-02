@@ -5,12 +5,13 @@ var connection = (function () {
         download: download,
         upload: upload,
         authenticate: authenticate,
+        setTokenHeader: setTokenHeader,
     };
 
     function init() {
         var token = db.getToken();
         if (!token) return;
-        http.setDefaultHeader({ name: 'Token', value: token });
+        http.setDefaultHeader('Token', token);
     }
 
     function authenticate(username, password, cb, err) {
@@ -24,9 +25,7 @@ var connection = (function () {
             if (result) {
                 var user = JSON.parse(result);
                 var token = user.id;
-                db.setToken(token);
-                db.setUser(user);
-                http.setDefaultHeader({ name: 'Token', value: token });
+                setTokenHeader(token);
             }
             cb && cb(user);
         }, err);
@@ -37,7 +36,12 @@ var connection = (function () {
     }
 
     function upload(data, cb, err) {
-        http.post('write', data, [{ name: 'Content-Type', value: 'application/json' }], cb, err);
+        http.post('write', JSON.stringify(data), [{ name: 'Content-Type', value: 'application/json' }], cb, err);
+    }
+
+    function setTokenHeader(token) {
+        db.setToken(token);
+        http.setDefaultHeader({ name: 'Token', value: token });
     }
 
 }())

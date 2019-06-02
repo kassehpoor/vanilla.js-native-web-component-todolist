@@ -26,7 +26,7 @@ exports.requestHnadler = function requestHnadler(req, res) {
 	// ================================================================================================
 
 	function writeHandler(req, res) {
-		var token = req.headers['token'];
+		var token = req.headers['token'] || 0;
 		var bytes = [];
 		req.on('data', chunk => {
 			bytes.push(chunk)
@@ -48,7 +48,7 @@ exports.requestHnadler = function requestHnadler(req, res) {
 	}
 
 	function readHandler(req, res) {
-		var token = req.headers['token'];
+		var token = req.headers['token'] || 0;
 		res.writeHead(200, { 'Content-Type': 'text/json' });
 		fs.readFile('./storage.txt', function (err, content) {
 			if (err) {

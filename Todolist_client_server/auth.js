@@ -5,6 +5,13 @@ var _users = [
         password: 'khafan',
         firstName: 'Saleh',
         lastName: 'Yusef'
+    },
+    {
+        id : 2,
+        username: 'tahereh',
+        password: 'k',
+        firstName: 'tahereh',
+        lastName: 'kasehpoor'
     }
 ];
 
