@@ -1,6 +1,5 @@
 {
-    
-    {
+   {
         "id": 1,
         "username": "saleh",
         "password": "khafan",
@@ -14,5 +13,4 @@
         "firstName": "tahereh",
         "lastName": "kasehpoor"
     }
-    
 }
