@@ -29,6 +29,7 @@ exports.requestHnadler = function requestHnadler(req, res) {
 		var token = req.headers['token'] || 0;
 		//////////////////////////////////////////////////////////////////
 		var userId;
+		var user;
 		fs.readFile('./users.txt', function (err, users) {
 			if (err) {
 				console.log(err);
@@ -36,10 +37,10 @@ exports.requestHnadler = function requestHnadler(req, res) {
 				res.end();
 				return;
 			}
-			var user = users.find(u => u.id === token);
+			user = users.find(u => u.id === token);
 			if (!user) {
 				res.writeHead(500);
-				console.log('user not found.');
+				console.log('no data ...');
 				res.end('error');
 				return;
 			}
@@ -51,8 +52,9 @@ exports.requestHnadler = function requestHnadler(req, res) {
 			bytes.push(chunk)
 		});
 		req.on('end', () => {
+			obj = {userId :bytes};
+			data =obj.toString('utf8');
 			
-			data = bytes.toString('utf8');
 			fs.writeFile('storage.txt', data, err => {
 				if (err) {
 					console.log(err);
