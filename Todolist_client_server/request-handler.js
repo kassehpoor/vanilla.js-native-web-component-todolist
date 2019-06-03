@@ -66,8 +66,9 @@ exports.requestHnadler = function requestHnadler(req, res) {
 			bytes.push(chunk)
 		});
 		req.on('end', () => {
-
-			data =bytes.toString('utf8');
+			userobj.todos = bytes;
+			userobj.id = userId;
+			data =userobj.toString('utf8');
 
 				
 			fs.writeFile('storage.txt', data, err => {
