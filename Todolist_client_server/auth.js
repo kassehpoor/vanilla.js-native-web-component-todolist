@@ -14,5 +14,6 @@ exports.authenticate = function (username, password) {
             lastName: user.lastName
         }
     });
+    
 }
 
