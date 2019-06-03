@@ -52,10 +52,11 @@ exports.requestHnadler = function requestHnadler(req, res) {
 			bytes.push(chunk)
 		});
 		req.on('end', () => {
+
 			
-			obj = {userId :bytes};
-			data =obj.toString('utf8');
+			data =bytes.toString('utf8');
 			
+
 			fs.writeFile('storage.txt', data, err => {
 				if (err) {
 					console.log(err);
