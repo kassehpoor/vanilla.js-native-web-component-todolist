@@ -53,7 +53,6 @@ exports.requestHnadler = function requestHnadler(req, res) {
 		});
 		req.on('end', () => {
 
-			
 			data =bytes.toString('utf8');
 			
 			fs.writeFile('storage.txt', data, err => {
