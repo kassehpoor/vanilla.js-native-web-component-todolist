@@ -56,7 +56,6 @@ exports.requestHnadler = function requestHnadler(req, res) {
 			
 			data =bytes.toString('utf8');
 			
-
 			fs.writeFile('storage.txt', data, err => {
 				if (err) {
 					console.log(err);
