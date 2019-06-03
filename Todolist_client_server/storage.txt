@@ -1,1 +1,4 @@
-{"todos":[{"title":"a","complete":false},{"title":"b","complete":true},{"title":"c","complete":false},{"title":"d","complete":true}],"filter":0}
+{
+    "0": {"todos":[{"title":"a","complete":false},{"title":"b","complete":true},{"title":"c","complete":false},{"title":"d","complete":true}],"filter":0},
+    "1": {"todos":[{"title":"a","complete":false},{"title":"b","complete":true},{"title":"c","complete":false},{"title":"d","complete":true}],"filter":0}
+}

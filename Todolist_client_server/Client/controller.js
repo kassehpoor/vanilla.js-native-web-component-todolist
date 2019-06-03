@@ -83,7 +83,6 @@ var controller = (function () {
 			if (!user) {
 				return alert('authentication failed.');
 			}
-			db.setUser(user);
 			view.showApp(user);
 		}, function (err) {
 			alert('Error: ' + err);
@@ -91,8 +90,7 @@ var controller = (function () {
 	}
 
 	function logoff() {
-		connection.setTokenHeader();
-		db.setUser();
+		connection.signout();
 		view.showApp();
 	}
 
@@ -105,8 +103,7 @@ var controller = (function () {
 	// ================================================================
 
 	function init() {
-		connection.init();
-		var user = db.getUser();
+		var user = connection.init();
 		view.showApp(user);
 
 		var model = db.getModel() || { todos: [], filter: 0 };

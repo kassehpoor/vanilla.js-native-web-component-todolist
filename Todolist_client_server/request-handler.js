@@ -27,11 +27,31 @@ exports.requestHnadler = function requestHnadler(req, res) {
 
 	function writeHandler(req, res) {
 		var token = req.headers['token'] || 0;
+		//////////////////////////////////////////////////////////////////
+		var userId;
+		fs.readFile('./users.txt', function (err, users) {
+			if (err) {
+				console.log(err);
+				res.writeHead(500);
+				res.end();
+				return;
+			}
+			var user = users.find(u => u.id === token);
+			if (!user) {
+				res.writeHead(500);
+				console.log('user not found.');
+				res.end('error');
+				return;
+			}
+			userId = user.id;
+		});
+		
 		var bytes = [];
 		req.on('data', chunk => {
 			bytes.push(chunk)
 		});
 		req.on('end', () => {
+			
 			data = bytes.toString('utf8');
 			fs.writeFile('storage.txt', data, err => {
 				if (err) {
@@ -49,6 +69,7 @@ exports.requestHnadler = function requestHnadler(req, res) {
 
 	function readHandler(req, res) {
 		var token = req.headers['token'] || 0;
+		var userId = token;
 		res.writeHead(200, { 'Content-Type': 'text/json' });
 		fs.readFile('./storage.txt', function (err, content) {
 			if (err) {
@@ -57,8 +78,10 @@ exports.requestHnadler = function requestHnadler(req, res) {
 				res.end();
 				return;
 			}
+			var data = JSON.parse(content);
+			var result = data[userId];
 			res.writeHead(200);
-			res.write(content);
+			res.write(JSON.stringify(result));
 			res.end();
 		});
 	}
@@ -94,7 +117,6 @@ exports.requestHnadler = function requestHnadler(req, res) {
 			res.end();
 			return;
 		}
-
 		res.writeHead(200);
 		res.write(JSON.stringify(user));
 		res.end();

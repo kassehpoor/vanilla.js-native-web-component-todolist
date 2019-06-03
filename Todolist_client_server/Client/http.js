@@ -49,6 +49,7 @@ var http = (function () {
         });
 
         (headers || []).forEach(function (h) {
+            if (h.value === undefined || h.value === null) return;
             xhr.setRequestHeader(h.name, h.value);
         });
         xhr.send(data);

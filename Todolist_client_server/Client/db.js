@@ -1,13 +1,10 @@
 var db = (function () {
     var MODEL_KEY = 'MODEL',
-        TOKEN_KEY = 'TOKEN',
         USER_KEY = 'USER';
 
     return {
         getModel: getModelFromLocalStorage,
         setModel: setModelToLocalStorage,
-        getToken: getTokenFromLocalStorage,
-        setToken: setTokenToLocalStorage,
         getUser: getUserFromLocalStorage,
         setUser: setUserToLocalStorage,
     };
@@ -23,19 +20,6 @@ var db = (function () {
         localStorage.setItem(MODEL_KEY, JSON.stringify(value));
     };
 
-    function getTokenFromLocalStorage() {
-        var token = localStorage.getItem(TOKEN_KEY);
-        if (!token) return null;
-        return token;
-    }
-
-    function setTokenToLocalStorage(token) {
-        if (!token) {
-            return localStorage.removeItem(TOKEN_KEY);
-        }
-        localStorage.setItem(TOKEN_KEY, token);
-    }
-
     function getUserFromLocalStorage() {
         var user = localStorage.getItem(USER_KEY);
         if (!user) return null;
@@ -50,5 +34,3 @@ var db = (function () {
     }
 
 }())
-
-
