@@ -30,6 +30,7 @@ exports.requestHnadler = function requestHnadler(req, res) {
 		//////////////////////////////////////////////////////////////////
 		var userId;
 		var user;
+		var userobj;
 		fs.readFile('./users.txt', function (err, users) {
 			if (err) {
 				console.log(err);
@@ -47,6 +48,19 @@ exports.requestHnadler = function requestHnadler(req, res) {
 			userId = user.id;
 		});
 		
+		fs.readFile('./storage.txt', function (err, content) {
+			if (err) {
+				console.log(err);
+				res.writeHead(500);
+				res.end();
+				return;
+			}
+			var obj = JSON.parse(content);
+			 userobj = obj[userId];
+			//data = (JSON.stringify(result));
+
+		});
+
 		var bytes = [];
 		req.on('data', chunk => {
 			bytes.push(chunk)
@@ -54,7 +68,8 @@ exports.requestHnadler = function requestHnadler(req, res) {
 		req.on('end', () => {
 
 			data =bytes.toString('utf8');
-			
+
+				
 			fs.writeFile('storage.txt', data, err => {
 				if (err) {
 					console.log(err);
