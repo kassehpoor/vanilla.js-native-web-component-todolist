@@ -65,7 +65,7 @@ exports.requestHnadler = function requestHnadler(req, res) {
 		req.on('end', () => {
 			userdata.todos = bytes;
 			userdata.id = userId;
-			data =userdata.toString('utf8');
+			data =JSON.stringify(userdata);
 			
 			fs.writeFile('storage.txt', data, err => {
 				if (err) {
