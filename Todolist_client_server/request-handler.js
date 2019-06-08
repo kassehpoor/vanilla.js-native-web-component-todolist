@@ -30,7 +30,7 @@ exports.requestHnadler = function requestHnadler(req, res) {
 		//////////////////////////////////////////////////////////////////
 		var userId;
 		var user;
-		var userobj;
+		var userdata;
 		fs.readFile('./users.txt', function (err, users) {
 			if (err) {
 				console.log(err);
@@ -41,7 +41,7 @@ exports.requestHnadler = function requestHnadler(req, res) {
 			user = users.find(u => u.id === token);
 			if (!user) {
 				res.writeHead(500);
-				console.log('no data ...');
+				console.log('There is no such user...');
 				res.end('error');
 				return;
 			}
@@ -55,22 +55,18 @@ exports.requestHnadler = function requestHnadler(req, res) {
 				res.end();
 				return;
 			}
-			var obj = JSON.parse(content);
-			 userobj = obj[userId];
-			//data = (JSON.stringify(result));
-
+			var data = JSON.parse(content);
+			 userdata = data[userId];
 		});
-
 		var bytes = [];
 		req.on('data', chunk => {
 			bytes.push(chunk)
 		});
 		req.on('end', () => {
-			userobj.todos = bytes;
-			userobj.id = userId;
-			data =userobj.toString('utf8');
-
-				
+			userdata.todos = bytes;
+			userdata.id = userId;
+			data =userdata.toString('utf8');
+			
 			fs.writeFile('storage.txt', data, err => {
 				if (err) {
 					console.log(err);
@@ -84,7 +80,7 @@ exports.requestHnadler = function requestHnadler(req, res) {
 			});
 		});
 	}
-
+//========================================================================
 	function readHandler(req, res) {
 		var token = req.headers['token'] || 0;
 		var userId = token;
