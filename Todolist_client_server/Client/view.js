@@ -8,6 +8,8 @@ var view = (function () {
 	var usernameInput = document.getElementById('userLogin');
 	var passwordInput = document.getElementById('passLogin');
 	var btnSignout = document.getElementById('btnSignout');
+	var DownloadButton = document.getElementById('DownloadButton');
+	var UplodButton = document.getElementById('UplodButton');
 
 	init();
 
@@ -84,6 +86,8 @@ var view = (function () {
 			btnSignin.style.display = 'block';
 			btnSignout.style.display = 'none';
 			spnUserDisplayName.textContent = 'anonymous user';
+			DownloadButton.style.display = 'none';
+			UplodButton.style.display = 'none';
 		}
 
 	};
