@@ -1,5 +1,4 @@
 [
-
 {   
     "id" :1,
     "todos":[{"title":"x1","complete":false},{"title":"x2","complete":false}],
@@ -10,7 +9,6 @@
     "todos":[{"title":"task-one1","complete":false},{"title":"task-two2","complete":false}],
     "filter":0
 }
-
 ]
 
 
