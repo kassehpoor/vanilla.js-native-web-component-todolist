@@ -136,7 +136,7 @@ function authHandler(req, res) {
 	auth.authenticate(username, password, function (user) {
 		if (!user) {
 			res.writeHead(401);
-			res.end('invalid usename or password !!');
+			res.end('invalid username or password !!');
 			return;
 		}
 		res.writeHead(200);
