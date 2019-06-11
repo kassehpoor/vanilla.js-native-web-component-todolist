@@ -1,4 +1,4 @@
-{
+[
    {
         "id": 1,
         "username": "saleh",
@@ -13,4 +13,5 @@
         "firstName": "tahereh",
         "lastName": "kasehpoor"
     }
-}
+
+]

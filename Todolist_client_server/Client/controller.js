@@ -85,7 +85,7 @@ var controller = (function () {
 			}
 			view.showApp(user);
 		}, function (err) {
-			alert('Error: ' + err);
+			alert(err);
 		});
 	}
 
