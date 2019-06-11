@@ -82,6 +82,8 @@ var view = (function () {
 			btnSignin.style.display = 'none';
 			btnSignout.style.display = 'inline-block';
 			spnUserDisplayName.textContent = user.firstName + ' ' + user.lastName;
+			DownloadButton.style.display = 'inline-block';
+			UplodButton.style.display = 'inline-block';
 		} else {
 			btnSignin.style.display = 'block';
 			btnSignout.style.display = 'none';
