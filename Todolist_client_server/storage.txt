@@ -1,7 +1,7 @@
 [
 {   
     "id" :1,
-    "todos":[{"title":"x1","complete":false},{"title":"x2","complete":false}],
+    "todos":[{"title":"dog","complete":false},{"title":"cat","complete":true}],
     "filter":0
 },
 

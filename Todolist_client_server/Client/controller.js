@@ -1,6 +1,7 @@
 var controller = (function () {
 	var _todos = [];
 	var _filter = 0; // 0:all   1:active   2:complete
+	var _userId = 0;
 	/*
 		{"todos":[
 			{"title":"salam1","complete":false},
@@ -104,16 +105,18 @@ var controller = (function () {
 
 	function init() {
 		var user = connection.init();
+		_userId = user && user.id;
 		view.showApp(user);
-
-		var model = db.getModel() || { todos: [], filter: 0 };
+	
+		//var model = db.getModel(_userId) || { todos: [], filter: 0 };
+		var model = db.getModel((user || {id:0}).id);
 		_todos = model.todos;
 		_filter = model.filter;
 		render();
 	}
 
 	function render() {
-		db.setModel({ todos: _todos, filter: _filter });
+		db.setModel({ userId: _userId, todos: _todos, filter: _filter });
 		view.render(getFilteredTodos());
 	}
 
