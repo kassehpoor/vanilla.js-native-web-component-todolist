@@ -28,7 +28,7 @@ exports.requestHnadler = function requestHnadler(req, res) {
 
 function writeHandler(req, res) {
 	var token = req.headers['token'] || 0;
-	``
+
 	var userId;
 	//var user;
 	var userdata;
@@ -47,39 +47,44 @@ function writeHandler(req, res) {
 			return;
 		}
 		userId = user.id;
-	});
-
-	fs.readFile('./storage.txt', function (err, content) {
-		if (err) {
-			console.log(err);
-			res.writeHead(500);
-			res.end();
-			return;
-		}
-		var data = JSON.parse(content);
-		userdata = data[userId];
-	});
-	var bytes = [];
-	req.on('data', chunk => {
-		bytes.push(chunk)
-	});
-	req.on('end', () => {
-		userdata.todos = bytes;
-		userdata.id = userId;
-		data = JSON.stringify(userdata);
-
-		fs.writeFile('storage.txt', data, err => {
+		fs.readFile('./storage.txt', function (err, content) {
 			if (err) {
 				console.log(err);
 				res.writeHead(500);
 				res.end();
 				return;
 			}
-			console.log('successfully written to storage.txt file !');
-			res.writeHead(200, { 'Content-Type': 'text/json' });
-			res.end();
+			var data = JSON.parse(content);
+			userdata = data[userId];
+			!userdata && (userdata = data[userId] = {});
+
+			var bytes = [];
+			req.on('data', chunk => {
+				bytes.push(chunk)
+			});
+			req.on('end', () => {
+				userdata.todos = bytes;
+				userdata.id = userId;
+
+				fs.writeFile('storage.txt', JSON.stringify(data), err => {
+					if (err) {
+						console.log(err);
+						res.writeHead(500);
+						res.end();
+						return;
+					}
+					console.log('successfully written to storage.txt file !');
+					res.writeHead(200, { 'Content-Type': 'text/json' });
+					res.end();
+				});
+			});
+
 		});
+
 	});
+
+
+
 }
 
 //-----------------------------------------------------
