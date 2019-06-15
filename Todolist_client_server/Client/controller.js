@@ -56,7 +56,7 @@ var controller = (function () {
 	}
 
 	function upload() {
-		var data = db.getModel();
+		var data = db.getModel(_user.id);
 		console.log ('data to upload is :'+data);
 		if (!data) return alert('there is nothing to upload.');
 		var confirmResult = confirm('data on the server will be replaced!, are you sure to continue?');
@@ -64,7 +64,7 @@ var controller = (function () {
 		connection.upload(data, function () {
 			alert('upload done successfully.');
 		}, function () {
-			alert('upload failed ,because of the server problem.');
+			alert('upload failed !!!');
 		});
 	}
 
