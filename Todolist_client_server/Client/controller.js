@@ -1,20 +1,8 @@
 var controller = (function () {
 	var _todos = [];
 	var _filter = 0; // 0:all   1:active   2:complete
-	var _userId = 0;
-	/*
-		{"todos":[
-			{"title":"salam1","complete":false},
-			{"title":"salam2","complete":false}
-		],
-			"filter":0}
-	*/
-	/*
-	var model = {
-		1:{todos:[], filter:0},
-		2:{todos:[], filter:0}
-		}
-	*/
+	var _user = {};
+
 	init();
 
 	return {
@@ -84,15 +72,17 @@ var controller = (function () {
 			if (!user) {
 				return alert('authentication failed.');
 			}
-			view.showApp(user);
+			db.setCurrentUser(user);
+			init();
 		}, function (err) {
 			alert(err);
 		});
 	}
 
 	function logoff() {
+		db.setCurrentUser();
 		connection.signout();
-		view.showApp();
+		init();
 	}
 
 	function filterTodos(value) {
@@ -104,33 +94,29 @@ var controller = (function () {
 	// ================================================================
 
 	function init() {
-		var user = connection.init();
-		_userId = user && user.id;
-		view.showApp(user);
-	
-		//var model = db.getModel(_userId) || { todos: [], filter: 0 };
-		var model = db.getModel((user || {id:0}).id)|| {todos:[],filter:0};
-		console.log(model)
-		_todos = model.todos;
-		_filter = model.filter;
+		_user = db.getCurrentUser() || { id: 0 };
+		connection.init(_user.id);
+		view.showApp(_user);
+
+		var model = db.getModel(_user.id) || {};
+		_todos = model.todos || [];
+		_filter = model.filter || 0;
 		render();
 	}
 
 	function render() {
-		db.setModel(_userId,{ userId: _userId, todos: _todos, filter: _filter });
+		db.setModel(_user.id, { todos: _todos, filter: _filter });
 		view.render(getFilteredTodos());
 	}
 
 	function getFilteredTodos() {
 		//filter ----> 0:all   1:active   2:complete
-	
 		if (!_filter) {
 			return _todos;
 		}
-		var filtered =  _todos.filter(function (t) {
+		var filtered = _todos.filter(function (t) {
 			return (_filter === 1) ? !t.complete : t.complete;
 		});
-		
 		return filtered
 	}
 

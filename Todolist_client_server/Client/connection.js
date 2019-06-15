@@ -8,12 +8,8 @@ var connection = (function () {
         signout: signout,
     };
 
-    function init() {
-        var user = db.getUser();
-        if (user) {
-            setTokenHeader(user.id);
-        }
-        return user;
+    function init(userId) {
+        setTokenHeader(userId);
     }
 
     function authenticate(username, password, cb, err) {
@@ -25,7 +21,6 @@ var connection = (function () {
         http.post('auth', null, headers, function (result) {
             if (result) {
                 var user = JSON.parse(result);
-                db.setUser(user);
                 setTokenHeader(user.id);
             }
             cb && cb(user);
@@ -41,7 +36,6 @@ var connection = (function () {
     }
 
     function signout() {
-        db.setUser();
         setTokenHeader();
     }
 

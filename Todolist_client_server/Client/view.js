@@ -78,7 +78,7 @@ var view = (function () {
 		appPage.style.display = 'block';
 		spnUserDisplayName.style.display = 'inline-block';
 
-		if (user) {
+		if (user && user.id) {
 			btnSignin.style.display = 'none';
 			btnSignout.style.display = 'inline-block';
 			spnUserDisplayName.textContent = user.firstName + ' ' + user.lastName;

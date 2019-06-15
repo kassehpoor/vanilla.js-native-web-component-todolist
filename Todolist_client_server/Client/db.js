@@ -1,40 +1,37 @@
 var db = (function () {
-    //   MODEL_KEY = 'USER_MODEL',
-    allModels = [];
-         USER_KEY = 'USER';
- 
-     return {
-         getModel: getModelFromLocalStorage,
-         setModel: setModelToLocalStorage,
-         getUser: getUserFromLocalStorage,
-         setUser: setUserToLocalStorage,
-     };
- 
-     function getModelFromLocalStorage(userId) {
-         var model = JSON.parse(localStorage.getItem('USER_MODEL')) || {};
-         var userModel = model[userId];
-         if (!userModel) return null;
-         return userModel;
-     };
- 
-     function setModelToLocalStorage(userId,userModel) {
-         !userModel && (userModel = {});
-         var model = JSON.parse(localStorage.getItem('USER_MODEL'))|| {};
-         model[userId] = userModel; 
-         localStorage.setItem('USER_MODEL', JSON.stringify(model));
-     };
- 
-     function getUserFromLocalStorage() {
-         var user = localStorage.getItem(USER_KEY);
-         if (!user) return null;
-         return JSON.parse(user);
-     }
- 
-     function setUserToLocalStorage(user) {
-         if (!user) {
-             return localStorage.removeItem(USER_KEY);
-         }
-         localStorage.setItem(USER_KEY, JSON.stringify(user));
-     }
- 
- }())
+    var MODEL_KEY = 'MODEL',
+        USER_KEY = 'USER';
+
+    return {
+        getModel: getModel,
+        setModel: setModel,
+        getCurrentUser: getCurrentUser,
+        setCurrentUser: setCurrentUser,
+    };
+
+    function getModel(userId) {
+        var allModels = JSON.parse(localStorage.getItem(MODEL_KEY) || '{}');
+        return allModels[userId];
+    };
+
+    function setModel(userId, model) {
+        !model && (model = {});
+        var allModels = JSON.parse(localStorage.getItem(MODEL_KEY) || '{}');
+        allModels[userId] = model;
+        localStorage.setItem(MODEL_KEY, JSON.stringify(allModels));
+    };
+
+    function getCurrentUser() {
+        var user = localStorage.getItem(USER_KEY);
+        if (!user) return null;
+        return JSON.parse(user);
+    }
+
+    function setCurrentUser(user) {
+        if (!user) {
+            return localStorage.removeItem(USER_KEY);
+        }
+        localStorage.setItem(USER_KEY, JSON.stringify(user));
+    }
+
+}())
