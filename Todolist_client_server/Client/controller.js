@@ -48,7 +48,9 @@ var controller = (function () {
 			if (!data) return alert('there is nothing on the server to replace client data.');
 			var confirmResult = confirm('data on the local storage will be repaced!, are you sure to continue?');
 			if (!confirmResult) return;
-			db.setModel(JSON.parse(data));
+			model = JSON.parse (data);
+			db.setModel(_user.id, { todos: model.todos, filter:model.filter });
+			//db.setModel(JSON.parse(data));
 			init();
 		}, function (err) {
 			alert(err);
