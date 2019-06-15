@@ -30,7 +30,7 @@ function writeHandler(req, res) {
 	var token = req.headers['token'] || 0;
 	``
 	var userId;
-	var user;
+	//var user;
 	var userdata;
 	fs.readFile('./users.txt', function (err, users) {
 		if (err) {
@@ -39,10 +39,10 @@ function writeHandler(req, res) {
 			res.end();
 			return;
 		}
-		user = users.find(u => u.id === token);
+		var user = users.find(u => u.id === token);
 		if (!user) {
 			res.writeHead(500);
-			console.log('There is no such user...');
+			console.log('error in recognizing user...');
 			res.end('error');
 			return;
 		}

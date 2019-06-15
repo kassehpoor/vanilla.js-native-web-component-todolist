@@ -57,6 +57,7 @@ var controller = (function () {
 
 	function upload() {
 		var data = db.getModel();
+		console.log ('data to upload is :'+data);
 		if (!data) return alert('there is nothing to upload.');
 		var confirmResult = confirm('data on the server will be replaced!, are you sure to continue?');
 		if (!confirmResult) return;
