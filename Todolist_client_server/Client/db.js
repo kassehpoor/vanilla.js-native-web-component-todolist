@@ -11,18 +11,17 @@ var db = (function () {
      };
  
      function getModelFromLocalStorage(userId) {
-         var userModel = JSON.parse(localStorage.getItem('USER_MODEL'))[userId];
+         var model = JSON.parse(localStorage.getItem('USER_MODEL')) || {};
+         var userModel = model[userId];
          if (!userModel) return null;
          return userModel;
      };
  
-     function setModelToLocalStorage(userModel) {
+     function setModelToLocalStorage(userId,userModel) {
          !userModel && (userModel = {});
-         var userId = userModel.userId;
-         var userModel =  JSON.parse(localStorage.getItem('USER_MODEL'))[userId];
-         var allModels = JSON.parse(localStorage.getItem('USER_MODEL'));
-         allModels[userId] = userModel;
-         localStorage.setItem('USER_MODEL', JSON.stringify(allModels));
+         var model = JSON.parse(localStorage.getItem('USER_MODEL'))|| {};
+         model[userId] = userModel; 
+         localStorage.setItem('USER_MODEL', JSON.stringify(model));
      };
  
      function getUserFromLocalStorage() {

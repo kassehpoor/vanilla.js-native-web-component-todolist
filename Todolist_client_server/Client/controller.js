@@ -109,25 +109,29 @@ var controller = (function () {
 		view.showApp(user);
 	
 		//var model = db.getModel(_userId) || { todos: [], filter: 0 };
-		var model = db.getModel((user || {id:0}).id);
+		var model = db.getModel((user || {id:0}).id)|| {todos:[],filter:0};
+		console.log(model)
 		_todos = model.todos;
 		_filter = model.filter;
 		render();
 	}
 
 	function render() {
-		db.setModel({ userId: _userId, todos: _todos, filter: _filter });
+		db.setModel(_userId,{ userId: _userId, todos: _todos, filter: _filter });
 		view.render(getFilteredTodos());
 	}
 
 	function getFilteredTodos() {
 		//filter ----> 0:all   1:active   2:complete
+	
 		if (!_filter) {
 			return _todos;
 		}
-		return _todos.filter(function (t) {
+		var filtered =  _todos.filter(function (t) {
 			return (_filter === 1) ? !t.complete : t.complete;
 		});
+		
+		return filtered
 	}
 
 })();
