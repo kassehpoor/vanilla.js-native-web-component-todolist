@@ -42,7 +42,7 @@ var connection = (function () {
     // ========================================================================================================================
 
     function setTokenHeader(token) {
-        http.setDefaultHeader({ name: 'Token', value: token });
+        http.setDefaultHeader('token', token);
     }
 
 }())

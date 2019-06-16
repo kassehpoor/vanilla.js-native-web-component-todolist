@@ -27,22 +27,23 @@ exports.requestHnadler = function requestHnadler(req, res) {
 // =======================================================================
 
 function writeHandler(req, res) {
-	var token = req.headers['token'] || 0;
-	fs.readFile('./users.txt', function (err, users) {
+	var token = req.headers['token'] || 0;// token is a string
+	var userId = +token;
+	fs.readFile('./users.txt', function (err, result) {
 		if (err) {
 			console.log(err);
 			res.writeHead(500);
 			res.end();
 			return;
 		}
-		var user = users.find(u => u.id === token);
+		var users = JSON.parse(result);
+		var user = users.find(u => u.id === userId);
 		if (!user) {
 			res.writeHead(500);
 			console.log('error in recognizing user...');
-			res.end('error');
+			res.end('invalid token');
 			return;
 		}
-		var userId = user.id;
 		fs.readFile('./storage.txt', function (err, content) {
 			if (err) {
 				console.log(err);
@@ -52,15 +53,17 @@ function writeHandler(req, res) {
 			}
 			var data = JSON.parse(content);
 			var userdata = data[userId];
-			!userdata && (userdata = data[userId] = {});
+			!userdata && (userdata = data[userId] = { id: userId });
 
 			var bytes = [];
 			req.on('data', chunk => {
 				bytes.push(chunk)
 			});
 			req.on('end', () => {
-				userdata.todos = bytes;
-				userdata.id = userId;
+				var value = bytes.toString('utf8'); // TODO:...
+				var model = JSON.parse(value);
+				userdata.todos = model.todos;
+				userdata.filter = model.filter;
 
 				fs.writeFile('storage.txt', JSON.stringify(data), err => {
 					if (err) {
@@ -78,9 +81,6 @@ function writeHandler(req, res) {
 		});
 
 	});
-
-
-
 }
 
 //-----------------------------------------------------
@@ -97,7 +97,7 @@ function readHandler(req, res) {
 			return;
 		}
 		var data = JSON.parse(content);
-		var result = data[userId];
+		var result = data[userId] || {};
 		res.writeHead(200);
 		res.write(JSON.stringify(result));
 		res.end();
