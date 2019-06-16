@@ -28,10 +28,6 @@ exports.requestHnadler = function requestHnadler(req, res) {
 
 function writeHandler(req, res) {
 	var token = req.headers['token'] || 0;
-
-	var userId;
-	//var user;
-	var userdata;
 	fs.readFile('./users.txt', function (err, users) {
 		if (err) {
 			console.log(err);
@@ -46,7 +42,7 @@ function writeHandler(req, res) {
 			res.end('error');
 			return;
 		}
-		userId = user.id;
+		var userId = user.id;
 		fs.readFile('./storage.txt', function (err, content) {
 			if (err) {
 				console.log(err);
@@ -55,7 +51,7 @@ function writeHandler(req, res) {
 				return;
 			}
 			var data = JSON.parse(content);
-			userdata = data[userId];
+			var userdata = data[userId];
 			!userdata && (userdata = data[userId] = {});
 
 			var bytes = [];
