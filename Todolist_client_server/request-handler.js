@@ -2,6 +2,10 @@ var fs = require('fs');
 
 var auth = require('./auth');
 
+var searchUser = require('./find-user');
+
+var userdataHandler = require('./userdata-handler');
+
 exports.requestHnadler = function requestHnadler(req, res) {
 	console.log(req.method, req.url);
 
@@ -26,7 +30,7 @@ exports.requestHnadler = function requestHnadler(req, res) {
 
 // =======================================================================
 
-function writeHandler(req, res) {
+function _writeHandler(req, res) {
 	var token = req.headers['token'] || 0;// token is a string
 	var userId = +token;
 	fs.readFile('./users.txt', function (err, result) {
@@ -77,12 +81,52 @@ function writeHandler(req, res) {
 					res.end();
 				});
 			});
-
 		});
-
 	});
 }
 
+//----------------------------------------------------
+function writeHandler(req,res){
+	var token = req.headers['token'] ||0; 
+	var userId = +token;
+
+	searchUser.findUser(userId,function (user,err){
+		if (err){
+			res.writeHead(401);
+			res.end('invalid username or password !!');
+			return;
+		}
+		if (!user) {
+			res.writeHead(500);
+			console.log('error in recognizing user...');
+			res.end('invalid token');
+			return;
+		}
+		
+		userdataHandler.readUserData (userId,function(userdata,data){
+			var bytes = [];
+			req.on('data', chunk => {
+				bytes.push(chunk)
+			});
+			req.on('end', () => {
+				var value = bytes.toString('utf8');
+				var model = JSON.parse(value);
+				userdata.todos = model.todos;
+				userdata.filter = model.filter;
+
+				userdataHandler.writeData (data,function(){
+				console.log('successfully written to storage.txt file !');
+		        res.writeHead(200, { 'Content-Type': 'text/json' });
+				res.end();
+			});
+				
+			});
+		});
+		
+	});
+
+	
+}
 //-----------------------------------------------------
 
 function readHandler(req, res) {

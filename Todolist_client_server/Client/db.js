@@ -32,6 +32,7 @@ var db = (function () {
             return localStorage.removeItem(USER_KEY);
         }
         localStorage.setItem(USER_KEY, JSON.stringify(user));
+        //return localStorage[user ? 'setItem' : 'removeItem'](USER_KEY,JSON.stringify(user));
     }
 
 }())
