@@ -10,7 +10,7 @@ var view = (function () {
 	var btnSignout = document.getElementById('btnSignout');
 	var DownloadButton = document.getElementById('DownloadButton');
 	var UplodButton = document.getElementById('UplodButton');
-
+	
 	init();
 
 	return {

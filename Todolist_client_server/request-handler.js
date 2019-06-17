@@ -129,7 +129,7 @@ function writeHandler(req,res){
 				console.log('successfully written to storage.txt file !');
 		        res.writeHead(200, { 'Content-Type': 'text/json' });
 				res.end();
-			});
+			    });
 				
 			});
 		});
