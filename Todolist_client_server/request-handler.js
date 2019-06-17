@@ -29,7 +29,7 @@ exports.requestHnadler = function requestHnadler(req, res) {
 }
 
 // =======================================================================
-
+/*
 function _writeHandler(req, res) {
 	var token = req.headers['token'] || 0;// token is a string
 	var userId = +token;
@@ -84,6 +84,7 @@ function _writeHandler(req, res) {
 		});
 	});
 }
+*/
 
 //----------------------------------------------------
 function writeHandler(req,res){
@@ -103,7 +104,12 @@ function writeHandler(req,res){
 			return;
 		}
 		
-		userdataHandler.readUserData (userId,function(userdata,data){
+		userdataHandler.readUserData (userId,function(userdata,data,err){
+			if (err){
+				res.writeHead(401);
+				res.end('error in data reading...');
+				return;
+			}
 			var bytes = [];
 			req.on('data', chunk => {
 				bytes.push(chunk)
@@ -114,7 +120,12 @@ function writeHandler(req,res){
 				userdata.todos = model.todos;
 				userdata.filter = model.filter;
 
-				userdataHandler.writeData (data,function(){
+				userdataHandler.writeData (data,function(err){
+					if (err){
+						res.writeHead(401);
+						res.end('error in writing data...');
+						return;
+					}	
 				console.log('successfully written to storage.txt file !');
 		        res.writeHead(200, { 'Content-Type': 'text/json' });
 				res.end();
