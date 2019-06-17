@@ -1,6 +1,11 @@
 var fs = require('fs');
 
-exports.readUserData = function writeUserData(userId,cb,errFn) {
+module.exports = {
+	readUserData : readUserData,
+	writeData: writeData
+}
+
+function readUserData(userId,cb,errFn) {
 	fs.readFile('./storage.txt', function (err, content) {
 		if (err) {
 			console.log(err);
@@ -14,7 +19,7 @@ exports.readUserData = function writeUserData(userId,cb,errFn) {
 	});
 };
 	
-exports.writeData = function writeUserData (data,cb,errFn){
+function writeData (data,cb,errFn){
 
 	fs.writeFile('storage.txt', JSON.stringify(data), err => {
 		if (err) {

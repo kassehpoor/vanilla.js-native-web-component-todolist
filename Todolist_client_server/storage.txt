@@ -1,1 +1,1 @@
-{"1":{"todos":[{"title":"dog","complete":false},{"title":"cat","complete":true}],"filter":0},"2":{"id":2,"todos":[{"title":"zzzzzzzzz1","complete":false},{"title":"wwwwwww2","complete":false}],"filter":0}}
+{"1":{"todos":[{"title":"dog","complete":false},{"title":"cat","complete":true}],"filter":0},"2":{"id":2,"todos":[{"title":"new1","complete":false},{"title":"new2","complete":false}],"filter":0}}

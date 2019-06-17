@@ -2,9 +2,9 @@ var fs = require('fs');
 
 var auth = require('./auth');
 
-var searchUser = require('./find-user');
+var userService = require('./user-service');
 
-var userdataHandler = require('./userdata-handler');
+var dataService = require('./data-service');
 
 exports.requestHnadler = function requestHnadler(req, res) {
 	console.log(req.method, req.url);
@@ -87,26 +87,28 @@ function _writeHandler(req, res) {
 */
 
 //----------------------------------------------------
-function writeHandler(req,res){
-	var token = req.headers['token'] ||0; 
+function writeHandler(req, res) {
+	var token = req.headers['token'] || 0;
 	var userId = +token;
 
-	searchUser.findUser(userId,function (user,err){
-		if (err){
-			res.writeHead(401);
-			res.end('invalid username or password !!');
+	userService.findUser(userId, function (err, user) {
+
+		if (err) {
+			res.writeHead(500);
+			res.end('an error occured: ' + err);
 			return;
 		}
+
 		if (!user) {
-			res.writeHead(500);
-			console.log('error in recognizing user...');
+			res.writeHead(401);
+			console.log('invalid token.');
 			res.end('invalid token');
 			return;
 		}
-		
-		userdataHandler.readUserData (userId,function(userdata,data,err){
-			if (err){
-				res.writeHead(401);
+
+		dataService.readUserData(userId, function (userdata, data, err) {
+			if (err) {
+				res.writeHead(500);
 				res.end('error in data reading...');
 				return;
 			}
@@ -120,23 +122,23 @@ function writeHandler(req,res){
 				userdata.todos = model.todos;
 				userdata.filter = model.filter;
 
-				userdataHandler.writeData (data,function(err){
-					if (err){
-						res.writeHead(401);
+				dataService.writeData(data, function (err) {
+					if (err) {
+						res.writeHead(500);
 						res.end('error in writing data...');
 						return;
-					}	
-				console.log('successfully written to storage.txt file !');
-		        res.writeHead(200, { 'Content-Type': 'text/json' });
-				res.end();
-			    });
-				
+					}
+					console.log('successfully written to storage.txt file !');
+					res.writeHead(200, { 'Content-Type': 'text/json' });
+					res.end();
+				});
+
 			});
 		});
-		
+
 	});
 
-	
+
 }
 //-----------------------------------------------------
 
