@@ -7,11 +7,11 @@ module.exports = {
 }
 
 
-function findUser(userId, cb) {
+function findUser(userId, cb, errFn) {
     fs.readFile(filePath, function (err, result) {
         if (err) {
             console.log(err);
-            cb && cb(err);
+            errFn && errFn(err);
             return;
         }
         var allUsers = JSON.parse(result);
