@@ -106,7 +106,7 @@ function writeHandler(req, res) {
 			return;
 		}
 
-		dataService.readUserData(userId, function (userdata, data, err) {
+		dataService.readData(userId, function (userdata, data, err) {
 			if (err) {
 				res.writeHead(500);
 				res.end('error in data reading...');
@@ -137,8 +137,6 @@ function writeHandler(req, res) {
 		});
 
 	});
-
-
 }
 //-----------------------------------------------------
 
