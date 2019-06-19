@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-var filePath = './users.txt';
+var filePath = './data/users.txt';
 
 module.exports = {
     findUser: findUser,

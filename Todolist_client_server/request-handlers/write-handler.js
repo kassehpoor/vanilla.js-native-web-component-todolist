@@ -1,6 +1,6 @@
-var userService = require('../user-service');
-var dataService = require('../data-service');
-var bodyParser = require('../body-parser');
+var userService = require('../services/user-service');
+var dataService = require('../services/data-service');
+var bodyParser = require('../services/body-parser');
 
 module.exports = function writeHandler(req, res) {
 	var token = req.headers['token'] || 0;
@@ -14,7 +14,7 @@ module.exports = function writeHandler(req, res) {
 			return;
 		}
 
-		dataService.readData(userId, function (data) {
+		dataService.readData(function (data) {
 			var userdata = data[userId];
 			!userdata && (userdata = data[userId] = { id: userId });
 			bodyParser.parse(req, function (model) {

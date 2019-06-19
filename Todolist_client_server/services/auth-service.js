@@ -1,6 +1,5 @@
 var fs = require('fs');
-
-var filePath = './users.txt';
+var filePath = './data/users.txt';
 
 exports.authenticate = function (username, password, cb, errFn) {
     fs.readFile(filePath, function (err, data) {

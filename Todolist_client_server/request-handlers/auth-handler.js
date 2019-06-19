@@ -1,11 +1,11 @@
-var auth = require('../auth');
+var authService = require('../services/auth-service');
 
 module.exports = function authHandler(req, res) {
 
 	var username = req.headers['username'];
 	var password = req.headers['password'];
 
-	auth.authenticate(username, password, function (user) {
+	authService.authenticate(username, password, function (user) {
 		if (!user) {
 			res.writeHead(401);
 			res.end('invalid username or password !!');
