@@ -6,10 +6,27 @@ var connection = (function () {
         upload: upload,
         authenticate: authenticate,
         signout: signout,
+        registerUser: registerUser
     };
 
     function init(userId) {
         setTokenHeader(userId);
+    }
+
+    function registerUser(fisrtname, lastname, username, password,cb,err) {
+        var data = {
+            "username": fisrtname,
+            "password": lastname,
+            "firstName": username,
+            "lastName": password
+        }
+        http.post('register', JSON.stringify(data), [{ name: 'Content-Type', value: 'application/json' }],  function (result) {
+            if (result) {
+                var user = JSON.parse(result);
+                setTokenHeader(user.id);
+            }
+            cb && cb(user);
+        }, err);
     }
 
     function authenticate(username, password, cb, err) {

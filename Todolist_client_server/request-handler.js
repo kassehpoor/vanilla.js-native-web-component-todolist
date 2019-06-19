@@ -10,7 +10,8 @@ exports.requestHnadler = function requestHnadler(req, res) {
 		},
 		'POST': {
 			'/write': handlers.writeHandler,
-			'/auth': handlers.authHandler
+			'/auth': handlers.authHandler,
+			'register':handlers.registerHandler
 		},
 	})[req.method][req.url];
 

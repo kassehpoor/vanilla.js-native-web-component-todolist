@@ -12,9 +12,10 @@
     <header>
         <h1>todos</h1>
         <div>
-            <input type="button" value="Sign in" id="btnSignin" class="btn-Signin-Signout" onclick="view.showLoginPage()">
+            <input type="button" value="Sign in" id="btnSignin" class="btn-Signin-Signout-Signup" onclick="view.showLoginPage()">
+            <input type="button" value="Sign up" id="btnSignup" class="btn-Signin-Signout-Signup" onclick="view.showRegisterPage()">
             <span id="spnUserDisplayName">---</span>
-            <input type="button" value="Sign out" id="btnSignout" class="btn-Signin-Signout" style="display:none" onclick="view.logoff()">
+            <input type="button" value="Sign out" id="btnSignout" class="btn-Signin-Signout-Signup" style="display:none" onclick="view.logoff()">
         </div>
     </header>
     <main>
@@ -57,6 +58,28 @@
                 <input type="button" value="Cancel" class="btn-Cancel" onclick="view.cancelLogin()" />
             </div>
         </div>
+
+        <div id="signup-page" style="display:none">
+            <div>
+                <span></span><input type="text" placeholder="fisrtname" class="userSignup" id="fisrtnameSignup" />
+            </div>
+            <div>
+                <span></span><input type="text" placeholder="lastname" class="userSignup" id="lastnameSignup" />
+            </div>
+            <div>
+                <span></span><input type="text" placeholder="username" class="userSignup" id="usernameSignup" />
+            </div>
+            <div>
+                <span></span><input type="text" placeholder="password" class="userSignup" id="passwordSignup" />
+            </div>
+            <div>
+                <br></br>
+                <input type="button" value="submit" class="btnSubmit" onclick="view.register()" />
+                <input type="button" value="Cancel" class="btn-Cancel" onclick="view.cancelRegister()" />
+            </div>
+        </div>
+
+
     </main>
     <script src="http.js"></script>
     <script src="db.js"></script>

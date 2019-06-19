@@ -20,3 +20,5 @@ function findUser(userId, cb, errFn) {
         //cb && cb(null, user);wrong
     });
 }
+
+

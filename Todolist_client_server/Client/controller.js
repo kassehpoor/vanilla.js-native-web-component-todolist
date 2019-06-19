@@ -15,7 +15,8 @@ var controller = (function () {
 		upload: upload,
 		filterTodos: filterTodos,
 		login: login,
-		logoff: logoff
+		logoff: logoff,
+		register: register
 	};
 
 	function addTodo(value) {
@@ -74,6 +75,18 @@ var controller = (function () {
 		connection.authenticate(username, password, function (user) {
 			if (!user) {
 				return alert('authentication failed.');
+			}
+			db.setCurrentUser(user);
+			init();
+		}, function (err) {
+			alert(err);
+		});
+	}
+
+	function register(fisrtname, lastname, username, password) {
+		connection.registerUser(fisrtname, lastname, username, password, function (user) {
+			if (!user) {
+				return alert('register failed.');
 			}
 			db.setCurrentUser(user);
 			init();
