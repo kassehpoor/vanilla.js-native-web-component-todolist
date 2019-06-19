@@ -3,7 +3,7 @@ var userService = require('../services/user-service');
 var dataService = require('../services/data-service');
 
 module.exports = function registerUser(req, res) {
-
+   console.log('in registerUser function');
    userService.readUsers(function (allUsers) {
 
       bodyParser.parse(req, function (model) {
@@ -17,7 +17,7 @@ module.exports = function registerUser(req, res) {
             res.end();
          }, function (err) {
             res.writeHead(500);
-            res.end(err);
+            res.end('register user failed.'+err);
          });
 
       });
