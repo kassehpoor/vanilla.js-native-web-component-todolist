@@ -4,8 +4,8 @@ var filePath = './data/users.txt';
 
 module.exports = {
     findUser: findUser,
+    readUsers: readUsers
 }
-
 
 function findUser(userId, cb, errFn) {
     fs.readFile(filePath, function (err, result) {
@@ -20,5 +20,17 @@ function findUser(userId, cb, errFn) {
         //cb && cb(null, user);wrong
     });
 }
+
+function readUsers(cb, errFn) {
+	fs.readFile( './data/users.txt', function (err, content) {
+		if (err) {
+			console.log(err);
+			errFn && errFn(err);
+			return;
+		}
+		var data = JSON.parse(content);
+		cb && cb(data);
+	});
+};
 
 
