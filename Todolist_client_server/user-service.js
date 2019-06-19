@@ -16,6 +16,7 @@ function findUser(userId, cb, errFn) {
         }
         var allUsers = JSON.parse(result);
         var user = allUsers.find(u => u.id === userId);
-        cb && cb(null, user);
+        cb && cb(user);
+        //cb && cb(null, user);wrong
     });
 }
