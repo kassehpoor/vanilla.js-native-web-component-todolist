@@ -17,8 +17,16 @@ var view = (function () {
 	var lastnameSignup = document.getElementById('lastnameSignup');
 	var usernameSignup = document.getElementById('usernameSignup');
 	var passwordSignup = document.getElementById('passwordSignup');
-
+	var 
+	
 	init();
+	
+	addButton.onclick = add;
+	todoInput.onkeypress = function (e){
+		if (e.key === 'Enter') {
+			add();
+		}
+	};
 
 	return {
 		render: render,
@@ -37,6 +45,7 @@ var view = (function () {
 		cancelRegister: cancelRegister,
 	};
 
+	
 	function render(todos) {
 		todoListEl.innerHTML = '';
 		todos.forEach(function (todo) {
