@@ -26,7 +26,8 @@ function addUser(user, cb) {
         user.id = allUsers[allUsers.length - 1].id + 1;
         allUsers.push(user);
         writeUsers(allUsers, function () {
-            cb && cb(user);
+            var addedUser = {id :user.id,firstName:user.firstName,lastName:user.lastName}
+            cb && cb(addedUser);
         });
     });
 }
