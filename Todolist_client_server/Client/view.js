@@ -75,7 +75,7 @@ var view = (function () {
 		usernameInput.value = '';
 		passwordInput.value = '';
 	}
-
+	
 	function register() {
 		var fisrtname = fisrtnameSignup.value;
 		var lastname = lastnameSignup.value;

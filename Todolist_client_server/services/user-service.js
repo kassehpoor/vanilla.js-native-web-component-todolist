@@ -4,8 +4,7 @@ var filePath = './data/users.txt';
 
 module.exports = {
     findUser: findUser,
-    readUsers: readUsers,
-    writeData: writeData
+    addUser: addUser
 }
 
 function findUser(userId, cb, errFn) {
@@ -21,27 +20,38 @@ function findUser(userId, cb, errFn) {
     });
 }
 
+
+function addUser(user, cb) {
+    readUsers(function (allUsers) {
+        user.id = allUsers[allUsers.length - 1].id + 1;
+        allUsers.push(user);
+        writeUsers(allUsers, function () {
+            cb && cb(user);
+        });
+    });
+}
+
 function readUsers(cb, errFn) {
-	fs.readFile(filePath, function (err, content) {
-		if (err) {
-			console.log(err);
-			errFn && errFn(err);
-			return;
-		}
-		var data = JSON.parse(content);
-		cb && cb(data);
-	});
+    fs.readFile(filePath, function (err, content) {
+        if (err) {
+            console.log(err);
+            errFn && errFn(err);
+            return;
+        }
+        var data = JSON.parse(content);
+        cb && cb(data);
+    });
 };
 
-function writeData(data, cb, errFn) {
-	fs.writeFile(filePath, JSON.stringify(data), err => {
-		if (err) {
-			console.log(err);
-			errFn && errFn(err);
-			return;
-		}
-		cb && cb();
-	});
+function writeUsers(allusers, cb, errFn) {
+    fs.writeFile(filePath,JSON.stringify(allusers),err =>{
+        if (err) {
+            console.log(err);
+            errFn && errFn(err);
+            return;
+        }
+        cb && cb() 
+    });
 };
 
 
