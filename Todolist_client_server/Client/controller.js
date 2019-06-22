@@ -88,7 +88,7 @@ var controller = (function () {
 			if (!user) {
 				return alert('register failed.');
 			}
-		    alert('register done successfuly for  ' +user.username+' '+user.password);
+		    alert('register done successfuly for  ' +user.firstName+' '+user.lastName);
 			db.setCurrentUser(user);
 			init();
 		}, function (err) {
