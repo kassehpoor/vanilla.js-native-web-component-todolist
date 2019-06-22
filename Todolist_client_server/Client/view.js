@@ -1,5 +1,7 @@
 var view = (function () {
 	var todoInput = document.getElementById("todoText");
+	var addButton = document.getElementById("addButton");
+
 	var todoListEl = document.getElementById('todoList');
 	var appPage = document.getElementById('app');
 	var loginPage = document.getElementById('login-page');
@@ -17,8 +19,7 @@ var view = (function () {
 	var lastnameSignup = document.getElementById('lastnameSignup');
 	var usernameSignup = document.getElementById('usernameSignup');
 	var passwordSignup = document.getElementById('passwordSignup');
-	var 
-	
+			
 	init();
 	
 	addButton.onclick = add;
