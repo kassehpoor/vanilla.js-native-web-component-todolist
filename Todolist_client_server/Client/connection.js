@@ -15,10 +15,10 @@ var connection = (function () {
 
     function registerUser(fisrtname, lastname, username, password,cb,err) {
         var data = {
-            "username": fisrtname,
-            "password": lastname,
-            "firstName": username,
-            "lastName": password
+            "username": username,
+            "password": password,
+            "firstName": fisrtname,
+            "lastName": lastname
         }
         http.post('register', JSON.stringify(data), [{ name: 'Content-Type', value: 'application/json' }],  function (result) {
             if (result) {
