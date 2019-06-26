@@ -50,7 +50,7 @@ var SignInComponent = (function () {
             var user = JSON.parse(result);
             connection.setTokenHeader(user.id);
             db.setCurrentUser(user);
-            // init();
+            App.loadUser();
              Router.goto('todolist');
         }, function (err) {
             alert(err);

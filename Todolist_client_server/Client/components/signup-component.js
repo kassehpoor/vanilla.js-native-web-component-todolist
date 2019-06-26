@@ -54,6 +54,7 @@ var SignUpComponent = (function () {
             connection.setTokenHeader(user.id);
             db.setCurrentUser(user);
             //init();
+            App.loadUser();
             Router.goto('todolist');
         }, function (err) {
             alert(err);

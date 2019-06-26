@@ -1,17 +1,5 @@
 /************************login page*******************/
 
-.btn-Signin-Signout-Signup {
-  background-color: rgb(234, 240, 178);
-  -webkit-text-fill-color: black; 
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin: 4px 2px;
-  cursor: pointer;
-  float :right;
-}
-
 .do-sing-in-button {
   background-color: rgb(207, 230, 217);
   -webkit-text-fill-color: black; 
@@ -104,6 +92,31 @@
  }
 
 /************************app page*******************/
+.btn-Signin-Signout-Signup {
+  background-color: rgb(234, 240, 178);
+  -webkit-text-fill-color: black; 
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  float :right;
+}
+
+.todo-input {
+  
+  display: flex;
+  margin: 3px;
+  padding: 3px 7px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background-color: transparent;
+  border-bottom: solid 1px #cccccc;
+    
+}
+
 .complete {
     text-decoration: line-through;
     font-style: italic;
@@ -203,18 +216,7 @@ h1 {
     text-align: center;
 
 }
-.todo-input {
-  
-  display: flex;
-  margin: 3px;
-  padding: 3px 7px;
-  text-decoration: none;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  background-color: transparent;
-  border-bottom: solid 1px #cccccc;
-    
-}
+
 
 .li {
     padding: 5px;

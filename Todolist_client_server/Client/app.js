@@ -3,7 +3,8 @@ var App = (function () {
     var app = {
         init: init,
         parseHtml: parseHtml,
-        run: run
+        run: run,
+        loadUser: loadUser
     };
 
     return app;
@@ -15,12 +16,8 @@ var App = (function () {
         app.routerContainer = routerContainer;
         if (!app.routerContainer) throw new Error('Invalid router container.');
 
+        loadUser();
         Router.config(routes);
-
-        app.user = db.getCurrentUser() || { id: 0 };
-        connection.setTokenHeader(app.user.id);
-        app.userModel = db.getModel(app.user.id) || { todos: [], filter: 0 };
-
         Router.init();
     }
 
@@ -38,6 +35,12 @@ var App = (function () {
                 return Router.goto('signup');
             
         }
+    }
+
+    function loadUser() {
+        app.user = db.getCurrentUser() || { id: 0 };
+        connection.setTokenHeader(app.user.id);
+        app.userModel = db.getModel(app.user.id) || { todos: [], filter: 0 };
     }
 
 }());

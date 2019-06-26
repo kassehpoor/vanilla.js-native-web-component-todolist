@@ -12,11 +12,11 @@ var http = (function () {
     // =====================================================================
 
     function get(url, headers) {
-        xhr('GET', url, null, headers);
+        return xhr('GET', url, null, headers);
     }
 
     function post(url, data, headers) {
-        xhr('POST', url, data, headers);
+        return xhr('POST', url, data, headers);
     }
 
     function setDefaultHeader(name, value) {
