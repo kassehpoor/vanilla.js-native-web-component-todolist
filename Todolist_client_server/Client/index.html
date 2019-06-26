@@ -25,27 +25,7 @@
 
     <main>
 
-        <div id="signup-page" style="display:none">
-            <div>
-                <span></span><input type="text" placeholder="fisrtname" class="userSignup" id="fisrtnameSignup" />
-            </div>
-            <div>
-                <span></span><input type="text" placeholder="lastname" class="userSignup" id="lastnameSignup" />
-            </div>
-            <div>
-                <span></span><input type="text" placeholder="username" class="userSignup" id="usernameSignup" />
-            </div>
-            <div>
-                <span></span><input type="text" placeholder="password" class="userSignup" id="passwordSignup" />
-            </div>
-            <div>
-                <br></br>
-                <input type="button" value="submit" class="btnSubmit" onclick="view.register()" />
-                <input type="button" value="Cancel" class="btn-Cancel" onclick="view.cancelRegister()" />
-            </div>
-        </div>
-
-
+     
     </main>
 
     <script src="http.js"></script>
@@ -55,12 +35,14 @@
     <script src="router.js"></script>
     <script src="components/todo-component.js"></script>
     <script src="components/signin-component.js"></script>
+    <script src="components/signup-component.js"></script>
 
     <script>
         var routes = [
             { name: 'todolist', component: TodoComponent, default: true },
             { name:'signin', component: SignInComponent },
-            // { name:'signout', component: SignOutComponent },
+            //{ name:'signout', component: SignOutComponent },
+            { name:'signup', component: SignUpComponent }
         ];
         App.init(document.getElementById('app'), document.getElementById('router'), routes);
     </script>

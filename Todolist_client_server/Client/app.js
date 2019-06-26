@@ -34,6 +34,9 @@ var App = (function () {
         switch (opr) {
             case 'gotoSignInPage':
                 return Router.goto('signin');
+            case 'gotoSignUpPage':
+                return Router.goto('signup');
+            
         }
     }
 

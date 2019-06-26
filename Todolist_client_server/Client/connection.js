@@ -9,20 +9,14 @@ var connection = (function () {
         setTokenHeader: setTokenHeader
     };
 
-    function registerUser(fisrtname, lastname, username, password, cb, err) {
+    function registerUser(fisrtname, lastname, username, password) {
         var data = {
             "username": username,
             "password": password,
             "firstName": fisrtname,
             "lastName": lastname
         }
-        http.post('register', JSON.stringify(data), [{ name: 'Content-Type', value: 'application/json' }], function (result) {
-            if (result) {
-                var user = JSON.parse(result);
-                setTokenHeader(user.id);
-            }
-            cb && cb(user);
-        }, err);
+        return http.post('register', JSON.stringify(data), [{ name: 'Content-Type', value: 'application/json' }])
     }
 
     function authenticate(username, password) {

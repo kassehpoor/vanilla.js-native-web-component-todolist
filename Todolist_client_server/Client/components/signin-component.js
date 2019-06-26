@@ -11,7 +11,7 @@ var SignInComponent = (function () {
 
     }
 
-    function render(model) {
+    function render() {
         var dom = App.parseHtml(template()),
             btnDo = dom.getElementsByClassName('do-sing-in-button')[0],
             btnCancel = dom.getElementsByClassName('cancel-sing-in-button')[0];
@@ -51,8 +51,7 @@ var SignInComponent = (function () {
             connection.setTokenHeader(user.id);
             db.setCurrentUser(user);
             // init();
-            // go to ToDoComponent...
-            Router.goto('todolist');
+             Router.goto('todolist');
         }, function (err) {
             alert(err);
         });
