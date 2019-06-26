@@ -31,7 +31,15 @@ var Router = (function () {
         var route = _routes.find(function (r) { return r.name === routeName; });
         if (!route) throw new Error('route not found: ' + routeName);
 
-        App.render(route.component);
+        render(route.component);
+    }
+
+    // ====================================================================================
+
+    function render(component) {
+        App.routerContainer.innerHTML = '';
+        component.init();
+        App.routerContainer.appendChild(component.render());
     }
 
 }());

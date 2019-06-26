@@ -180,7 +180,7 @@ h1 {
     text-align: center;
 
 }
-#todoText {
+.todo-input {
   
   display: flex;
   margin: 3px;

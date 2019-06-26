@@ -38,7 +38,7 @@ var SignInComponent = (function () {
     }
 
     function cancelSingIn(e) {
-        // router.gotoTodoComponent
+        Router.goto('todolist');
     }
 
 
@@ -52,6 +52,7 @@ var SignInComponent = (function () {
             db.setCurrentUser(user);
             // init();
             // go to ToDoComponent...
+            Router.goto('todolist');
         }, function (err) {
             alert(err);
         });

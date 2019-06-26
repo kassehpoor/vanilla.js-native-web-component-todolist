@@ -8,18 +8,19 @@
     <link rel="stylesheet" href="todo.css">
 </head>
 
-<body>
+
+<body id="app">
     <header>
         <h1>todos</h1>
         <div>
-            <input type="button" value="Sign in" id="btnSignin" class="btn-Signin-Signout-Signup" onclick="view.showLoginPage()">
-            <input type="button" value="Sign up" id="btnSignup" class="btn-Signin-Signout-Signup" onclick="view.showRegisterPage()">
+            <input type="button" value="Sign in" id="btnSignin" class="btn-Signin-Signout-Signup" onclick="App.run('gotoSignInPage')">
+            <input type="button" value="Sign up" id="btnSignup" class="btn-Signin-Signout-Signup" onclick="App.run('gotoSignUpPage')">
             <span id="spnUserDisplayName">---</span>
-            <input type="button" value="Sign out" id="btnSignout" class="btn-Signin-Signout-Signup" style="display:none" onclick="view.logoff()">
+            <input type="button" value="Sign out" id="btnSignout" class="btn-Signin-Signout-Signup" onclick="App.run('singOut')">
         </div>
     </header>
 
-    <div id="app"></div>
+    <div id="router"></div>
 
 
     <main>
@@ -53,15 +54,15 @@
     <script src="app.js"></script>
     <script src="router.js"></script>
     <script src="components/todo-component.js"></script>
+    <script src="components/signin-component.js"></script>
 
     <script>
         var routes = [
             { name: 'todolist', component: TodoComponent, default: true },
-            // { name:'signin', component: SignInComponent },
+            { name:'signin', component: SignInComponent },
             // { name:'signout', component: SignOutComponent },
         ];
-        App.configRoutes(routes);
-        App.init(document.getElementById('app'));
+        App.init(document.getElementById('app'), document.getElementById('router'), routes);
     </script>
 
 </body>

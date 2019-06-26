@@ -1,21 +1,21 @@
 var App = (function () {
 
     var app = {
-        configRoutes: configRoutes,
         init: init,
         parseHtml: parseHtml,
-        render: render
+        run: run
     };
 
     return app;
 
-    function configRoutes(routes) {
-        Router.config(routes);
-    }
+    function init(appContainer, routerContainer, routes) {
+        app.appContainer = appContainer;
+        if (!app.appContainer) throw new Error('Invalid app container.');
 
-    function init(appContainer) {
-        app.container = appContainer;
-        if (!app.container) throw new Error('Invalid app container.');
+        app.routerContainer = routerContainer;
+        if (!app.routerContainer) throw new Error('Invalid router container.');
+
+        Router.config(routes);
 
         app.user = db.getCurrentUser() || { id: 0 };
         connection.setTokenHeader(app.user.id);
@@ -30,10 +30,11 @@ var App = (function () {
         return div.children[0];
     }
 
-    function render(component) {
-        app.container.innerHTML = '';
-        component.init();
-        app.container.appendChild(component.render());
+    function run(opr) {
+        switch (opr) {
+            case 'gotoSignInPage':
+                return Router.goto('signin');
+        }
     }
 
 }());
