@@ -1,26 +1,22 @@
-
 var connection = (function () {
     return {
-        init: init,
         download: download,
         upload: upload,
         authenticate: authenticate,
         signout: signout,
-        registerUser: registerUser
+        registerUser: registerUser,
+
+        setTokenHeader: setTokenHeader
     };
 
-    function init(userId) {
-        setTokenHeader(userId);
-    }
-
-    function registerUser(fisrtname, lastname, username, password,cb,err) {
+    function registerUser(fisrtname, lastname, username, password, cb, err) {
         var data = {
             "username": username,
             "password": password,
             "firstName": fisrtname,
             "lastName": lastname
         }
-        http.post('register', JSON.stringify(data), [{ name: 'Content-Type', value: 'application/json' }],  function (result) {
+        http.post('register', JSON.stringify(data), [{ name: 'Content-Type', value: 'application/json' }], function (result) {
             if (result) {
                 var user = JSON.parse(result);
                 setTokenHeader(user.id);
@@ -29,34 +25,26 @@ var connection = (function () {
         }, err);
     }
 
-    function authenticate(username, password, cb, err) {
+    function authenticate(username, password) {
         var headers = [
             { name: 'Content-Type', value: 'application/json' },
             { name: 'username', value: username },
             { name: 'password', value: password }
         ];
-        http.post('auth', null, headers, function (result) {
-            if (result) {
-                var user = JSON.parse(result);
-                setTokenHeader(user.id);
-            }
-            cb && cb(user);
-        }, err);
+        return http.post('auth', null, headers);
     }
 
-    function download(cb, err) {
-        http.get('read', [], cb, err);
+    function download() {
+        return http.get('read', []);
     }
 
-    function upload(data, cb, err) {
-        http.post('write', JSON.stringify(data), [{ name: 'Content-Type', value: 'application/json' }], cb, err);
+    function upload(data) {
+        return http.post('write', JSON.stringify(data), [{ name: 'Content-Type', value: 'application/json' }]);
     }
 
     function signout() {
         setTokenHeader();
     }
-
-    // ========================================================================================================================
 
     function setTokenHeader(token) {
         http.setDefaultHeader('token', token);

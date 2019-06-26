@@ -11,12 +11,12 @@ var http = (function () {
 
     // =====================================================================
 
-    function get(url, headers, cb, err) {
-        xhr('GET', url, null, headers, cb, err);
+    function get(url, headers) {
+        xhr('GET', url, null, headers);
     }
 
-    function post(url, data, headers, cb, err) {
-        xhr('POST', url, data, headers, cb, err);
+    function post(url, data, headers) {
+        xhr('POST', url, data, headers);
     }
 
     function setDefaultHeader(name, value) {
@@ -30,7 +30,42 @@ var http = (function () {
 
     // =====================================================================
 
-    function xhr(method, url, data, headers, cb, err) {
+    function xhr(method, url, data, headers) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    var data = xhr.responseText;
+                    xhr._cb && xhr._cb(data);
+                } else {
+                    xhr._err && xhr._err(xhr.responseText);
+                }
+            }
+        };
+
+        xhr.open(method, url, true);
+        _defaultHeaders.forEach(function (h) {
+            if (h.value === undefined || h.value === null) return;
+            xhr.setRequestHeader(h.name, h.value);
+        });
+
+        (headers || []).forEach(function (h) {
+            if (h.value === undefined || h.value === null) return;
+            xhr.setRequestHeader(h.name, h.value);
+        });
+        xhr.send(data);
+
+        return {
+            then: function(cb, err) {
+                xhr._cb = cb;
+                xhr._err = err;
+            }
+        };
+
+        
+    }
+
+    function xhr1(method, url, data, headers, cb, err) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4) {
