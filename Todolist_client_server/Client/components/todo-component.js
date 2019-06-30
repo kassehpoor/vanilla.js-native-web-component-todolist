@@ -1,8 +1,9 @@
 var TodoComponent = (function () {
+    window.addTodo = addTodo;
 
     var _user = {},
         _userModel = {};
-        var _todosContainer, _todoInput;
+    var _todosContainer, _todoInput;
 
     return {
         init: init,
@@ -26,12 +27,6 @@ var TodoComponent = (function () {
 
         _todoInput = dom.getElementsByClassName('todo-input')[0];
         _todosContainer = dom.getElementsByClassName('todos-container')[0];
-
-        _todoInput.onkeypress = function (e) {
-            if (e.key === 'Enter') {
-                addTodo();
-            }
-        };
 
         addTodoButton.onclick = addTodo;
         deleteAllTodosButton.onclick = deleteAllTodos;
@@ -87,9 +82,9 @@ var TodoComponent = (function () {
             if (!data) return alert('there is nothing on the server to replace client data.');
             var confirmResult = confirm('data on the local storage will be repaced!, are you sure to continue?');
             if (!confirmResult) return;
-            model = JSON.parse(data);
-            db.setModel(_user.id, model);
-            App.init();
+            _userModel = JSON.parse(data);
+            App.loadUser();
+            renderTodos();
         }, function (err) {
             alert(err);
         });
@@ -115,7 +110,7 @@ var TodoComponent = (function () {
 
 
     function createTodoElement(todo) {
-        var li = document.createElement('li');
+        var li = document.createElement('li'); addTodo
         li.className = 'li';
         var titleSpan = document.createElement('span');
 
@@ -156,11 +151,14 @@ var TodoComponent = (function () {
     function template() {
         return `
             <div>
-                <div class="control-div">
+                <div class="entries">
                     <div class="todo-input-container">
+                    <form onsubmit="event.preventDefault(); addTodo();">
                         <input type="text" placeholder="Enter your task..." class="todo-input">
+                    </form>    
                     </div>
-                    <div class="control-div__second-div">
+               
+                    <div class="list-of-todos">
                         <input class="addremove add-todo-button" type="button" value="Add">
                         <input class="addremove delete-all-todos-button" type="button" value="X All">
                         <input class="serverbtns download-todo-button" type="button" value="Download">
