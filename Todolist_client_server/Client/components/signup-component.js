@@ -51,11 +51,11 @@ var SignUpComponent = (function () {
                 return alert('register failed.');
             }
             alert('register done successfuly for  ' + user.firstName + ' ' + user.lastName);
-            connection.setTokenHeader(user.id);
-            db.setCurrentUser(user);
-            //init();
-            App.loadUser();
-            Router.goto('todolist');
+            App.reInit(user);
+            //connection.setTokenHeader(user.id);
+            //db.setCurrentUser(user);
+            //App.loadUser();
+           // Router.goto('todolist');
         }, function (err) {
             alert(err);
         });

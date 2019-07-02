@@ -4,7 +4,8 @@ var App = (function () {
         init: init,
         parseHtml: parseHtml,
         run: run,
-        loadUser: loadUser
+        loadUser: loadUser,
+        reInit: reInit
     };
 
     return app;
@@ -33,14 +34,20 @@ var App = (function () {
                 return Router.goto('signin');
             case 'gotoSignUpPage':
                 return Router.goto('signup');
-            
         }
     }
 
     function loadUser() {
         app.user = db.getCurrentUser() || { id: 0 };
         connection.setTokenHeader(app.user.id);
-        app.userModel = db.getModel(app.user.id) || { todos: [], filter: 0 };
+        //app.userModel = db.getModel(app.user.id) || { todos: [], filter: 0 };
+    }
+
+    function reInit(user) {
+        connection.setTokenHeader(user.id);
+        db.setCurrentUser(user);
+        loadUser();
+        Router.goto('todolist');
     }
 
 }());

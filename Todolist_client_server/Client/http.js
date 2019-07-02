@@ -61,33 +61,7 @@ var http = (function () {
                 xhr._err = err;
             }
         };
-
         
     }
-
-    function xhr1(method, url, data, headers, cb, err) {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-                if (xhr.status == 200) {
-                    var data = xhr.responseText;
-                    cb && cb(data);
-                } else {
-                    err && err(xhr.responseText);
-                }
-            }
-        };
-        xhr.open(method, url, true);
-        _defaultHeaders.forEach(function (h) {
-            if (h.value === undefined || h.value === null) return;
-            xhr.setRequestHeader(h.name, h.value);
-        });
-
-        (headers || []).forEach(function (h) {
-            if (h.value === undefined || h.value === null) return;
-            xhr.setRequestHeader(h.name, h.value);
-        });
-        xhr.send(data);
-    }
-
+  
 })();

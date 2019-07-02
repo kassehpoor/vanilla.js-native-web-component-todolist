@@ -27,6 +27,7 @@ function addUser(user, cb) {
         allUsers.push(user);
         writeUsers(allUsers, function () {
             var addedUser = {id :user.id,firstName:user.firstName,lastName:user.lastName}
+            //var addedUser = user;
             cb && cb(addedUser);
         });
     });

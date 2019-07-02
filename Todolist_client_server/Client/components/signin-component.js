@@ -37,7 +37,7 @@ var SignInComponent = (function () {
         _passwordInput.value = '';
     }
 
-    function cancelSingIn(e) {
+    function cancelSingIn() {
         Router.goto('todolist');
     }
 
@@ -48,10 +48,11 @@ var SignInComponent = (function () {
                 return alert('authentication failed.');
             }
             var user = JSON.parse(result);
-            connection.setTokenHeader(user.id);
-            db.setCurrentUser(user);
-            App.loadUser();
-            Router.goto('todolist');
+            App.reInit(user);
+            //connection.setTokenHeader(user.id);
+            //db.setCurrentUser(user);
+            //App.loadUser();
+            //Router.goto('todolist');
         }, function (err) {
             alert(err);
         });

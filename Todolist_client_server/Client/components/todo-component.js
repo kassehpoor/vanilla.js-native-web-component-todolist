@@ -4,19 +4,22 @@ var TodoComponent = (function () {
     var _user = {},
         _userModel = {};
     var _todosContainer, _todoInput;
+    var _currentUserDisplayName;
 
     return {
         init: init,
         render: render
     };
-
+    
     function init() {
-        _user = App.user;
-        _userModel = App.userModel;
+       _user = App.user;
+       _userModel = db.getModel( _user.id) || { todos: [], filter: 0 };
+       //_userModel = App.userModel;
     }
 
     function render() {
         var dom = App.parseHtml(template()),
+                                                                
             addTodoButton = dom.getElementsByClassName('add-todo-button')[0],
             deleteAllTodosButton = dom.getElementsByClassName('delete-all-todos-button')[0],
             downloadTodoButton = dom.getElementsByClassName('download-todo-button')[0],
@@ -28,6 +31,9 @@ var TodoComponent = (function () {
         _todoInput = dom.getElementsByClassName('todo-input')[0];
         _todosContainer = dom.getElementsByClassName('todos-container')[0];
 
+        _currentUserDisplayName = dom.getElementsByClassName('spnUserDisplayName')[0];
+
+        _currentUserDisplayName.textContent = _user.firstName + ' ' + _user.lastName;
         addTodoButton.onclick = addTodo;
         deleteAllTodosButton.onclick = deleteAllTodos;
         downloadTodoButton.onclick = downloadTodos;
@@ -43,7 +49,7 @@ var TodoComponent = (function () {
 
     // ===============================================================================================
 
-
+    
     function addTodo() {
         var value = _todoInput.value;
         if (!value) return;
@@ -110,7 +116,7 @@ var TodoComponent = (function () {
 
 
     function createTodoElement(todo) {
-        var li = document.createElement('li'); addTodo
+        var li = document.createElement('li');
         li.className = 'li';
         var titleSpan = document.createElement('span');
 
@@ -131,7 +137,7 @@ var TodoComponent = (function () {
 
 
         btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
-        btnRemove.textContent = 'X';
+		btnRemove.textContent = 'X';
 
         buttonsContainer.appendChild(btnComplete);
         buttonsContainer.appendChild(btnRemove);
@@ -151,6 +157,7 @@ var TodoComponent = (function () {
     function template() {
         return `
             <div>
+                <span class="spnUserDisplayName"></span>
                 <div class="entries">
                     <div class="todo-input-container">
                     <form onsubmit="event.preventDefault(); addTodo();">
