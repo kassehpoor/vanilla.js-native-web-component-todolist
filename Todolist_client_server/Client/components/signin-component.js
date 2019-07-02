@@ -51,7 +51,7 @@ var SignInComponent = (function () {
             connection.setTokenHeader(user.id);
             db.setCurrentUser(user);
             App.loadUser();
-             Router.goto('todolist');
+            Router.goto('todolist');
         }, function (err) {
             alert(err);
         });
@@ -61,10 +61,10 @@ var SignInComponent = (function () {
         return `
             <div>
                 <div>
-                    <input type="text" placeholder="username" class="userLogin username-input" />
+                    <input type="text" placeholder = "username" class = "username-input" />
                 </div>
                 <div>
-                    <input type="password" placeholder="password" class="passLogin password-input" />
+                    <input type="password" placeholder = "password" class = "password-input" />
                 </div>
                 <div>
                     <br></br>
