@@ -5,11 +5,13 @@ var SignOutComponent = (function () {
     }
 
     function init() {
-        db.setCurrentUser({ id: 0 });
+        setTimeout(function () {
+            App.reInit({ id: 0 });
+        });
     }
 
     function render() {
-        Router.goto('todolist');
+        return '';
     }
 
 }()); 
