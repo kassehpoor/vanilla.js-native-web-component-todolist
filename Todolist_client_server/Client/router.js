@@ -38,7 +38,9 @@ var Router = (function () {
 
     function render(component) {
         App.routerContainer.innerHTML = '';
-        component.init();
+        if (component === SignOutComponent) { TodoComponent.init(); return  } 
+         component.init();
+        //component.init();
         App.routerContainer.appendChild(component.render());
     }
 
