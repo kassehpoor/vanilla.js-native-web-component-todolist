@@ -34,8 +34,8 @@ var App = (function () {
                 return Router.goto('signin');
             case 'gotoSignUpPage':
                 return Router.goto('signup');
-            case 'singOut':
-                return Router.goto('signout');
+            // case 'singOut':
+            //     return Router.goto('signout');
         }
     }
 
@@ -43,6 +43,7 @@ var App = (function () {
         app.user = db.getCurrentUser() || { id: 0 };
         connection.setTokenHeader(app.user.id);
         //app.userModel = db.getModel(app.user.id) || { todos: [], filter: 0 };
+       
     }
 
     function reInit(user) {

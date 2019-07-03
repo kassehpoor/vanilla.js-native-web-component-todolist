@@ -6,8 +6,7 @@ var TodoComponent = (function () {
     var _todosContainer, _todoInput;
     var _currentUserDisplayName;
 
-    init();
-
+   
     return {
         init: init,
         render: render
@@ -15,7 +14,7 @@ var TodoComponent = (function () {
     
     function init() {
         App.loadUser();
-       _user = App.user;
+       _user =db.getCurrentUser() || { id: 0 };
        _userModel = db.getModel( _user.id) || { todos: [], filter: 0 };
        render();
 
@@ -40,7 +39,8 @@ var TodoComponent = (function () {
 
         _currentUserDisplayName = dom.getElementsByClassName('spnUserDisplayName')[0];
 
-        _currentUserDisplayName.textContent = _user.firstName ? _user.firstName :'anonymous user' + ' ' + _user.lastName ? _user.lastName :'';
+     
+        _currentUserDisplayName.textContent =(_user.id !== 0) ? _user.firstName + ' ' + _user.lastName :'anonymous user' ;
         addTodoButton.onclick = addTodo;
         deleteAllTodosButton.onclick = deleteAllTodos;
         downloadTodoButton.onclick = downloadTodos;
