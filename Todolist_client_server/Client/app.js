@@ -34,8 +34,8 @@ var App = (function () {
                 return Router.goto('signin');
             case 'gotoSignUpPage':
                 return Router.goto('signup');
-            // case 'singOut':
-            //     return Router.goto('signout');
+            case 'singOut':
+                return Router.goto('signout');
         }
     }
 

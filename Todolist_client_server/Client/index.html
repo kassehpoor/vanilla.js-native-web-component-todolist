@@ -35,13 +35,14 @@
     <script src="components/todo-component.js"></script>
     <script src="components/signin-component.js"></script>
     <script src="components/signup-component.js"></script>
+    <script src="components/signout-component.js"></script>
 
     <script>
         var routes = [
             { name: 'todolist', component: TodoComponent, default: true },
             { name:'signin', component: SignInComponent },
-           //{ name:'signout', component: SignOutComponent },
-            { name:'signup', component: SignUpComponent }
+            { name:'signup', component: SignUpComponent },
+            { name:'signout', component: SignOutComponent }
         ];
         App.init(document.getElementById('app'), document.getElementById('router'), routes);
     </script>

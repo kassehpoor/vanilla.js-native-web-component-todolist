@@ -17,10 +17,7 @@ var TodoComponent = (function () {
         _user = App.user;
         _userModel = db.getModel( _user.id) || { todos: [], filter: 0 };
        render();
-
-    //    _user = App.user;
-    //    _userModel = db.getModel( _user.id) || { todos: [], filter: 0 };
-    
+   
     }
 
     function render() {

@@ -53,10 +53,6 @@ var SignUpComponent = (function () {
             var user = JSON.parse(result);
             alert('register done successfuly for  ' + user.firstName + ' ' + user.lastName);
             App.reInit(user);
-            //connection.setTokenHeader(user.id);
-            //db.setCurrentUser(user);
-            //App.loadUser();
-           // Router.goto('todolist');
         }, function (err) {
             alert(err);
         });

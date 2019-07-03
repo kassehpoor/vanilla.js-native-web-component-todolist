@@ -49,10 +49,6 @@ var SignInComponent = (function () {
             }
             var user = JSON.parse(result);
             App.reInit(user);
-            //connection.setTokenHeader(user.id);
-            //db.setCurrentUser(user);
-            //App.loadUser();
-            //Router.goto('todolist');
         }, function (err) {
             alert(err);
         });
