@@ -46,10 +46,11 @@ var SignUpComponent = (function () {
 
 
     function register(fisrtname, lastname, username, password) {
-        connection.registerUser(fisrtname, lastname, username, password).then( function (user) {
-            if (!user) {
+        connection.registerUser(fisrtname, lastname, username, password).then( function (result) {
+            if (!result) {
                 return alert('register failed.');
             }
+            var user = JSON.parse(result);
             alert('register done successfuly for  ' + user.firstName + ' ' + user.lastName);
             App.reInit(user);
             //connection.setTokenHeader(user.id);
