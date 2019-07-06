@@ -11,7 +11,7 @@ var SignOutComponent = (function () {
     }
 
     function render() {
-        return '';
+        return App.parseHtml('<div></div>');
     }
 
 }()); 
