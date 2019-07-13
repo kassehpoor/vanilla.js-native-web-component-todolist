@@ -140,7 +140,18 @@
   cursor: pointer;
 }
 
-.addremove {
+.add-todo-button {
+  background-color: rgb(207, 230, 217);
+  -webkit-text-fill-color: black; 
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.delete-all-todos-button {
   background-color: rgb(207, 230, 217);
   -webkit-text-fill-color: black; 
   color: white;

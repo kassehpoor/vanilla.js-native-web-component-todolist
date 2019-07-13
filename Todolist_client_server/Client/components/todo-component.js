@@ -6,24 +6,24 @@ var TodoComponent = (function () {
     var _todosContainer, _todoInput;
     var _currentUserDisplayName;
 
-   
+
     return {
         init: init,
         render: render
     };
-    
+
     function init() {
         App.loadUser();
         _user = App.user;
-        _userModel = db.getModel( _user.id) || { todos: [], filter: 0 };
-       render();
-   
+        _userModel = db.getModel(_user.id) || { todos: [], filter: 0 };
+        render();
     }
 
     function render() {
+
         var dom = App.parseHtml(template()),
-                                                                
-            addTodoButton = dom.getElementsByClassName('add-todo-button')[0],
+
+            //addTodoButton = dom.getElementsByClassName('add-todo-button')[0],
             deleteAllTodosButton = dom.getElementsByClassName('delete-all-todos-button')[0],
             downloadTodoButton = dom.getElementsByClassName('download-todo-button')[0],
             uploadTodoButton = dom.getElementsByClassName('upload-todo-button')[0],
@@ -31,14 +31,27 @@ var TodoComponent = (function () {
             filterActiveButton = dom.getElementsByClassName('filter-active-button')[0],
             filterCompleteButton = dom.getElementsByClassName('filter-complete-button')[0];
 
-        _todoInput = dom.getElementsByClassName('todo-input')[0];
+                                                   
+        //_todoInput = dom.getElementsByClassName('todo-input')[0];
+        
+        _todoInput = dom.getElementsByClassName('submitTodoComp')[0]; 
+        _todoInput.addEventListener('submit', function (e) {
+            //addTodo(_todoInput.value)
+            addTodo(e.detail)
+            //addTodo(_todoInput.getAttribute('value'))
+
+            // console.log(e.detail);
+            // console.log( _todoInput.value);
+            // console.log( _todoInput.getAttribute('value'));
+        });
+
         _todosContainer = dom.getElementsByClassName('todos-container')[0];
 
         _currentUserDisplayName = dom.getElementsByClassName('spnUserDisplayName')[0];
 
-     
-        _currentUserDisplayName.textContent =(_user.id !== 0) ? _user.firstName + ' ' + _user.lastName :'anonymous user' ;
-        addTodoButton.onclick = addTodo;
+
+        _currentUserDisplayName.textContent = (_user.id !== 0) ? _user.firstName + ' ' + _user.lastName : 'anonymous user';
+        //addTodoButton.onclick = addTodo;
         deleteAllTodosButton.onclick = deleteAllTodos;
         downloadTodoButton.onclick = downloadTodos;
         uploadTodoButton.onclick = uploadTodos;
@@ -53,9 +66,9 @@ var TodoComponent = (function () {
 
     // ===============================================================================================
 
-    
-    function addTodo() {
-        var value = _todoInput.value;
+
+    function addTodo(value) {
+        //var value = _todoInput.value;
         if (!value) return;
         _userModel.todos.push({ title: value, complete: false });
         renderTodos();
@@ -141,7 +154,7 @@ var TodoComponent = (function () {
 
 
         btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
-		btnRemove.textContent = 'X';
+        btnRemove.textContent = 'X';
 
         buttonsContainer.appendChild(btnComplete);
         buttonsContainer.appendChild(btnRemove);
@@ -163,15 +176,12 @@ var TodoComponent = (function () {
             <div>
                 <span class="spnUserDisplayName"></span>
                 <div class="entries">
-                    <div class="todo-input-container">
-                    <form onsubmit="event.preventDefault(); addTodo();">
-                        <input type="text" placeholder="Enter your task..." class="todo-input">
-                    </form>    
-                    </div>
-               
+
+                <submit-todo class = 'submitTodoComp'></submit-todo>
+
                     <div class="list-of-todos">
-                        <input class="addremove add-todo-button" type="button" value="Add">
-                        <input class="addremove delete-all-todos-button" type="button" value="X All">
+
+                        <input class="delete-all-todos-button" type="button" value="X All">
                         <input class="serverbtns download-todo-button" type="button" value="Download">
                         <input class="serverbtns upload-todo-button" type="button" value="Upload">
                     </div>
@@ -189,4 +199,17 @@ var TodoComponent = (function () {
             </div>
         `;
     }
+
+
+    // <div class="todo-input-container">
+    //  <form onsubmit="event.preventDefault(); addTodo();">
+    //      <input type="text" placeholder="Enter your task..." class="todo-input">
+    //<input class="addremove add-todo-button" type="button" value="Add">
+    //  </form>    
+    // </div>
+    //<input class="add-todo-button" type="button" value="Add">
+
+    //******************************************************************* */
+
+
 }());

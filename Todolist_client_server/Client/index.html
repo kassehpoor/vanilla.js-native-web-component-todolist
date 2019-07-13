@@ -6,16 +6,34 @@
 
     <title>ToDoListProject</title>
     <link rel="stylesheet" href="todo.css">
+    <script src="components/submit-todo-component.js"></script>
 </head>
 
 
 <body id="app">
+
+    <!-- 
+    <submit-todo id='submitTodoComp'></submit-todo>
+
+    <script>
+        var stc = document.getElementById('submitTodoComp');
+        stc.addEventListener('submit', function (e) {
+            console.log(e.detail);
+            console.log(stc.value);
+            console.log(stc.getAttribute('value'));
+        });
+    </script>
+    !-->
+
     <header>
         <h1>todos</h1>
         <div>
-            <input type="button" value="Sign in" id="btnSignin" class="btn-Signin-Signout-Signup" onclick="App.run('gotoSignInPage')">
-            <input type="button" value="Sign up" id="btnSignup" class="btn-Signin-Signout-Signup" onclick="App.run('gotoSignUpPage')">
-            <input type="button" value="Sign out" id="btnSignout" class="btn-Signin-Signout-Signup" onclick="App.run('singOut')">
+            <input type="button" value="Sign in" id="btnSignin" class="btn-Signin-Signout-Signup"
+                onclick="App.run('gotoSignInPage')">
+            <input type="button" value="Sign up" id="btnSignup" class="btn-Signin-Signout-Signup"
+                onclick="App.run('gotoSignUpPage')">
+            <input type="button" value="Sign out" id="btnSignout" class="btn-Signin-Signout-Signup"
+                onclick="App.run('singOut')">
         </div>
     </header>
 
@@ -24,7 +42,7 @@
 
     <main>
 
-     
+
     </main>
 
     <script src="http.js"></script>
@@ -40,9 +58,9 @@
     <script>
         var routes = [
             { name: 'todolist', component: TodoComponent, default: true },
-            { name:'signin', component: SignInComponent },
-            { name:'signup', component: SignUpComponent },
-            { name:'signout', component: SignOutComponent }
+            { name: 'signin', component: SignInComponent },
+            { name: 'signup', component: SignUpComponent },
+            { name: 'signout', component: SignOutComponent }
         ];
         App.init(document.getElementById('app'), document.getElementById('router'), routes);
     </script>
