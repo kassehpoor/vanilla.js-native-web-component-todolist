@@ -3,7 +3,7 @@ var TodoComponent = (function () {
 
     var _user = {},
         _userModel = {};
-    var _todosContainer, _todoInput;
+    var _todosContainer, _submitTodoComp;
     var _currentUserDisplayName;
 
 
@@ -23,32 +23,24 @@ var TodoComponent = (function () {
 
         var dom = App.parseHtml(template()),
 
-            //addTodoButton = dom.getElementsByClassName('add-todo-button')[0],
             deleteAllTodosButton = dom.getElementsByClassName('delete-all-todos-button')[0],
             downloadTodoButton = dom.getElementsByClassName('download-todo-button')[0],
             uploadTodoButton = dom.getElementsByClassName('upload-todo-button')[0],
             filterAllButton = dom.getElementsByClassName('filter-all-button')[0],
             filterActiveButton = dom.getElementsByClassName('filter-active-button')[0],
             filterCompleteButton = dom.getElementsByClassName('filter-complete-button')[0];
-
-                                                   
-        //_todoInput = dom.getElementsByClassName('todo-input')[0];
+                                                  
         
-        _todoInput = dom.getElementsByClassName('submitTodoComp')[0]; 
-        _todoInput.addEventListener('submit', function (e) {
+        _submitTodoComp = dom.getElementsByClassName('submitTodoComp')[0]; 
+        _submitTodoComp.addEventListener('submit', function (e) {
             //addTodo(_todoInput.value)
             addTodo(e.detail)
             //addTodo(_todoInput.getAttribute('value'))
-
-            // console.log(e.detail);
-            // console.log( _todoInput.value);
-            // console.log( _todoInput.getAttribute('value'));
         });
 
         _todosContainer = dom.getElementsByClassName('todos-container')[0];
 
         _currentUserDisplayName = dom.getElementsByClassName('spnUserDisplayName')[0];
-
 
         _currentUserDisplayName.textContent = (_user.id !== 0) ? _user.firstName + ' ' + _user.lastName : 'anonymous user';
         //addTodoButton.onclick = addTodo;
@@ -68,11 +60,10 @@ var TodoComponent = (function () {
 
 
     function addTodo(value) {
-        //var value = _todoInput.value;
         if (!value) return;
         _userModel.todos.push({ title: value, complete: false });
         renderTodos();
-        _todoInput.value = '';
+        _submitTodoComp.value = '';
     }
 
     function renderTodos() {

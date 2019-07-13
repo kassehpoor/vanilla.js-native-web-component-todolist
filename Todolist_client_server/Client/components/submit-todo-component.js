@@ -29,7 +29,7 @@
     
     <form class="todo-form">
         <input type="text" placeholder="Enter a new todo..." class="todo-input">
-        <input type="button" value="add" class="add-todo-button">
+        <input type="submit" value="add" class="add-todo-button">
     </form>    
 `;
     class SubmitTodoComponent extends HTMLElement {
@@ -66,11 +66,12 @@
         }
 
         get value() {
-            return this._value;
+            //return this._value;
+            return this.getAttribute('value');
         }
 
         set value(val) {
-            return this._value = val;
+            this.setAttribute('value', val);
         }
 
         static get observedAttributes() {
