@@ -1,11 +1,8 @@
 var TodoComponent = (function () {
-    window.addTodo = addTodo;
 
     var _user = {},
         _userModel = {};
-    var _todosContainer, _submitTodoComp;
-    var _currentUserDisplayName;
-
+    var _todosContainer, _submitTodoComp, _currentUserDisplayName;
 
     return {
         init: init,
@@ -29,13 +26,18 @@ var TodoComponent = (function () {
             filterAllButton = dom.getElementsByClassName('filter-all-button')[0],
             filterActiveButton = dom.getElementsByClassName('filter-active-button')[0],
             filterCompleteButton = dom.getElementsByClassName('filter-complete-button')[0];
-                                                  
-        
-        _submitTodoComp = dom.getElementsByClassName('submitTodoComp')[0]; 
+
+
+        _submitTodoComp = dom.getElementsByClassName('submitTodoComp')[0];
         _submitTodoComp.addEventListener('submit', function (e) {
-            //addTodo(_todoInput.value)
-            addTodo(e.detail)
-            //addTodo(_todoInput.getAttribute('value'))
+            if (!e.detail) {
+                _submitTodoComp.value && _userModel.todos.push({ title: _submitTodoComp.value, complete: false });
+            }
+            renderTodos();
+            _submitTodoComp.value = '';
+        });
+        _submitTodoComp.addEventListener('cancelEdit', function (e) {
+            renderTodos();
         });
 
         _todosContainer = dom.getElementsByClassName('todos-container')[0];
@@ -43,7 +45,6 @@ var TodoComponent = (function () {
         _currentUserDisplayName = dom.getElementsByClassName('spnUserDisplayName')[0];
 
         _currentUserDisplayName.textContent = (_user.id !== 0) ? _user.firstName + ' ' + _user.lastName : 'anonymous user';
-        //addTodoButton.onclick = addTodo;
         deleteAllTodosButton.onclick = deleteAllTodos;
         downloadTodoButton.onclick = downloadTodos;
         uploadTodoButton.onclick = uploadTodos;
@@ -57,14 +58,6 @@ var TodoComponent = (function () {
     }
 
     // ===============================================================================================
-
-
-    function addTodo(value) {
-        if (!value) return;
-        _userModel.todos.push({ title: value, complete: false });
-        renderTodos();
-        _submitTodoComp.value = '';
-    }
 
     function renderTodos() {
         db.setModel(_user.id, _userModel);
@@ -129,7 +122,11 @@ var TodoComponent = (function () {
         var titleSpan = document.createElement('span');
 
         titleSpan.textContent = todo.title;
-        titleSpan.className = todo.complete ? 'complete' : 'active';
+        titleSpan.className = todo.complete
+            ? 'complete'
+            : todo.underEdit
+                ? 'editing'
+                : 'active';
         li.appendChild(titleSpan);
         li.appendChild(createButtons(todo));
 
@@ -138,18 +135,27 @@ var TodoComponent = (function () {
 
     function createButtons(todo) {
         var buttonsContainer = document.createElement('div');
+        var btnEdit = document.createElement('button');
         var btnComplete = document.createElement('button');
         var btnRemove = document.createElement('button');
+
+
+        btnEdit.setAttribute("class", "editbtn");
         btnComplete.setAttribute("class", "togbtn");
         btnRemove.setAttribute("class", "delbtn");
 
-
+        btnEdit.textContent = 'edit';
         btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
         btnRemove.textContent = 'X';
 
+        buttonsContainer.appendChild(btnEdit);
         buttonsContainer.appendChild(btnComplete);
         buttonsContainer.appendChild(btnRemove);
 
+        btnEdit.onclick = function (e) {
+            _submitTodoComp.underEditTodo = todo;
+            renderTodos();
+        };
         btnComplete.onclick = function () {
             todo.complete = !todo.complete;
             renderTodos();
@@ -192,15 +198,12 @@ var TodoComponent = (function () {
     }
 
 
-    // <div class="todo-input-container">
-    //  <form onsubmit="event.preventDefault(); addTodo();">
-    //      <input type="text" placeholder="Enter your task..." class="todo-input">
-    //<input class="addremove add-todo-button" type="button" value="Add">
-    //  </form>    
-    // </div>
-    //<input class="add-todo-button" type="button" value="Add">
-
-    //******************************************************************* */
-
-
 }());
+
+/*************************************************
+_submitTodoComp.addEventListener('submit', function (e) {
+    //addTodo(_todoInput.value)
+    addTodo(e.detail)
+    //addTodo(_todoInput.getAttribute('value'))
+});
+*/

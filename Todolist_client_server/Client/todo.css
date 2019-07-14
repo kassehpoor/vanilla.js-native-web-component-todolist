@@ -129,6 +129,10 @@
     color: black;
 }
 
+.editing {
+    color: red;
+}
+
 .serverbtns {
   background-color: rgb(234, 240, 178); 
   -webkit-text-fill-color: black;
@@ -191,6 +195,19 @@
 }
 
 .togbtn {
+  background-color:  #f1eded;
+  -webkit-text-fill-color: black; 
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.editbtn {
   background-color:  #f1eded;
   -webkit-text-fill-color: black; 
   border: none;
