@@ -6,7 +6,8 @@ var TodoComponent = (function () {
 
     return {
         init: init,
-        render: render
+        render: render,
+        getCurrentUser:function(){return _user}
     };
 
     function init() {
@@ -43,9 +44,6 @@ var TodoComponent = (function () {
 
         _todosContainer = dom.getElementsByClassName('todos-container')[0];
 
-        _currentUserDisplayName = dom.getElementsByClassName('spnUserDisplayName')[0];
-
-        _currentUserDisplayName.textContent = (_user.id !== 0) ? _user.firstName + ' ' + _user.lastName : 'anonymous user';
         deleteAllTodosButton.onclick = deleteAllTodos;
         downloadTodoButton.onclick = downloadTodos;
         uploadTodoButton.onclick = uploadTodos;
@@ -173,7 +171,6 @@ var TodoComponent = (function () {
     function template() {
         return `
             <div>
-                <span class="spnUserDisplayName"></span>
                 <div class="entries">
 
                 <submit-todo class = 'submitTodoComp'></submit-todo>
