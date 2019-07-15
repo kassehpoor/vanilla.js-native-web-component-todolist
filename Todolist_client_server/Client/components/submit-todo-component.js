@@ -75,7 +75,7 @@
                 me._underEditTodo = null;
                 me.setCancelButtonDisplay(false);
             });
-            //************************************************** */
+
             me._cancleEditButton.addEventListener('click', e => {
                 me._underEditTodo.underEdit = false;
                 me._underEditTodo = null;
@@ -88,7 +88,7 @@
                 }));
 
             });
-            //**************************************************** */
+
         }
 
         get value() {

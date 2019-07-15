@@ -36,6 +36,7 @@ var TodoComponent = (function () {
             renderTodos();
             _submitTodoComp.value = '';
         });
+
         _submitTodoComp.addEventListener('cancelEdit', function (e) {
             renderTodos();
         });
@@ -148,11 +149,12 @@ var TodoComponent = (function () {
         btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
         btnRemove.textContent = 'X';
 
-        buttonsContainer.appendChild(btnEdit);
+        if (!todo.complete) buttonsContainer.appendChild(btnEdit);
         buttonsContainer.appendChild(btnComplete);
         buttonsContainer.appendChild(btnRemove);
 
         btnEdit.onclick = function (e) {
+
             _submitTodoComp.underEditTodo = todo;
             renderTodos();
         };
@@ -197,13 +199,4 @@ var TodoComponent = (function () {
         `;
     }
 
-
 }());
-
-/*************************************************
-_submitTodoComp.addEventListener('submit', function (e) {
-    //addTodo(_todoInput.value)
-    addTodo(e.detail)
-    //addTodo(_todoInput.getAttribute('value'))
-});
-*/
