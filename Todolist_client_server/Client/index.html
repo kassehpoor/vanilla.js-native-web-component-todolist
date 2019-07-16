@@ -3,27 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-
     <title>ToDoListProject</title>
-    <link rel="stylesheet" href="todo.css">
+
+    <link rel="stylesheet" href="todo.css" />
+
     <script src="components/submit-todo-component.js"></script>
+    <script src="components/header-component.js"></script>
 </head>
 
 <body id="app">
 
-    <header>
-        <h1>todos</h1>
-        <div>
-            <input type="button" value="Sign in" id="btnSignin" class="btn-Signin-Signout-Signup"
-                onclick="App.run('gotoSignInPage')">
-            <input type="button" value="Sign up" id="btnSignup" class="btn-Signin-Signout-Signup"
-                onclick="App.run('gotoSignUpPage')">
-            <input type="button" value="Sign out" id="btnSignout" class="btn-Signin-Signout-Signup"
-                onclick="App.run('singOut')">
-        </div>
-    </header>
-    <span class="spnUserDisplayName"></span>
-
+    <headr-component id="headerComponent"></headr-component>
+   
     <div id="router"></div>
 
     <script src="http.js"></script>
@@ -35,6 +26,7 @@
     <script src="components/signin-component.js"></script>
     <script src="components/signup-component.js"></script>
     <script src="components/signout-component.js"></script>
+    
 
     <script>
         var routes = [
@@ -44,11 +36,7 @@
             { name: 'signout', component: SignOutComponent }
         ];
         App.init(document.getElementById('app'), document.getElementById('router'), routes);
-        var _user = TodoComponent.getCurrentUser()
-
-        _currentUserDisplayName = document.getElementsByClassName('spnUserDisplayName')[0];
-
-        _currentUserDisplayName.textContent = (_user.id !== 0) ? _user.firstName + ' ' + _user.lastName : 'anonymous user';
+     
     </script>
 
 </body>

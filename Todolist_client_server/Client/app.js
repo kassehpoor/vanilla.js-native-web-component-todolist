@@ -1,5 +1,7 @@
 var App = (function () {
 
+    var _headerComponent;
+
     var app = {
         init: init,
         parseHtml: parseHtml,
@@ -17,9 +19,26 @@ var App = (function () {
         app.routerContainer = routerContainer;
         if (!app.routerContainer) throw new Error('Invalid router container.');
 
+        _headerComponent = document.getElementById('headerComponent');
+
+      
         loadUser();
         Router.config(routes);
         Router.init();
+
+
+    _headerComponent.addEventListener('signin',function(e){
+        run('signin')
+    });
+
+    _headerComponent.addEventListener('signup',function(e){
+        run('signup')
+    });
+
+    _headerComponent.addEventListener('signout',function(e){
+        run('signout')
+    });
+
     }
 
     function parseHtml(html) {
@@ -29,12 +48,13 @@ var App = (function () {
     }
 
     function run(opr) {
+                
         switch (opr) {
-            case 'gotoSignInPage':
+            case 'signin':
                 return Router.goto('signin');
-            case 'gotoSignUpPage':
+            case 'signup':
                 return Router.goto('signup');
-            case 'singOut':
+            case 'signout':
                 return Router.goto('signout');
         }
     }
@@ -42,8 +62,9 @@ var App = (function () {
     function loadUser() {
         app.user = db.getCurrentUser() || { id: 0 };
         connection.setTokenHeader(app.user.id);
-        //app.userModel = db.getModel(app.user.id) || { todos: [], filter: 0 };
-       
+
+        _headerComponent.displayName = app.user.firstName ? app.user.firstName + ' ' + app.user.lastName : '';
+
     }
 
     function reInit(user) {

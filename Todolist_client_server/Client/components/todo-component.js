@@ -2,7 +2,7 @@ var TodoComponent = (function () {
 
     var _user = {},
         _userModel = {};
-    var _todosContainer, _submitTodoComp, _currentUserDisplayName;
+    var _todosContainer, _submitTodoComp;
 
     return {
         init: init,
