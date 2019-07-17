@@ -68,6 +68,7 @@ var TodoComponent = (function () {
         //_todosContainer.innerHTML = '';
         getFilteredTodos().forEach(function (todo) {
             //_todosContainer.appendChild(createTodoElement(todo));
+            
         });
 
         function getFilteredTodos() {
@@ -119,58 +120,58 @@ var TodoComponent = (function () {
     }
 
 
-    // function createTodoElement(todo) {
-    //     var li = document.createElement('li');
-    //     li.className = 'li';
-    //     var titleSpan = document.createElement('span');
+    function createTodoElement(todo) {
+        var li = document.createElement('li');
+        li.className = 'li';
+        var titleSpan = document.createElement('span');
 
-    //     titleSpan.textContent = todo.title;
-    //     titleSpan.className = todo.complete
-    //         ? 'complete'
-    //         : todo.underEdit
-    //             ? 'editing'
-    //             : 'active';
-    //     li.appendChild(titleSpan);
-    //     li.appendChild(createButtons(todo));
+        titleSpan.textContent = todo.title;
+        titleSpan.className = todo.complete
+            ? 'complete'
+            : todo.underEdit
+                ? 'editing'
+                : 'active';
+        li.appendChild(titleSpan);
+        li.appendChild(createButtons(todo));
 
-    //     return li;
-    // }
+        return li;
+    }
 
-    // function createButtons(todo) {
-    //     var buttonsContainer = document.createElement('div');
-    //     var btnEdit = document.createElement('button');
-    //     var btnComplete = document.createElement('button');
-    //     var btnRemove = document.createElement('button');
+    function createButtons(todo) {
+        var buttonsContainer = document.createElement('div');
+        var btnEdit = document.createElement('button');
+        var btnComplete = document.createElement('button');
+        var btnRemove = document.createElement('button');
 
 
-    //     btnEdit.setAttribute("class", "editbtn");
-    //     btnComplete.setAttribute("class", "togbtn");
-    //     btnRemove.setAttribute("class", "delbtn");
+        btnEdit.setAttribute("class", "editbtn");
+        btnComplete.setAttribute("class", "togbtn");
+        btnRemove.setAttribute("class", "delbtn");
 
-    //     btnEdit.textContent = 'edit';
-    //     btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
-    //     btnRemove.textContent = 'X';
+        btnEdit.textContent = 'edit';
+        btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
+        btnRemove.textContent = 'X';
 
-    //     if (!todo.complete) buttonsContainer.appendChild(btnEdit);
-    //     buttonsContainer.appendChild(btnComplete);
-    //     buttonsContainer.appendChild(btnRemove);
+        if (!todo.complete) buttonsContainer.appendChild(btnEdit);
+        buttonsContainer.appendChild(btnComplete);
+        buttonsContainer.appendChild(btnRemove);
 
-    //     btnEdit.onclick = function (e) {
+        btnEdit.onclick = function (e) {
 
-    //         _submitTodoComp.underEditTodo = todo;
-    //         renderTodos();
-    //     };
-    //     btnComplete.onclick = function () {
-    //         todo.complete = !todo.complete;
-    //         renderTodos();
-    //     };
-    //     btnRemove.onclick = function () {
-    //         _userModel.todos.splice(_userModel.todos.indexOf(todo), 1);
-    //         renderTodos();
-    //     };
+            _submitTodoComp.underEditTodo = todo;
+            renderTodos();
+        };
+        btnComplete.onclick = function () {
+            todo.complete = !todo.complete;
+            renderTodos();
+        };
+        btnRemove.onclick = function () {
+            _userModel.todos.splice(_userModel.todos.indexOf(todo), 1);
+            renderTodos();
+        };
 
-    //     return buttonsContainer;
-    // }
+        return buttonsContainer;
+    }
 
     function template() {
         return `

@@ -14,6 +14,45 @@
         -moz-osx-font-smoothing: grayscale;
         font-weight: 300;
     }
+    .delbtn {
+        background-color: #f1eded;
+        -webkit-text-fill-color: red; 
+        border: none;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+      }
+      .togbtn {
+        background-color:  #f1eded;
+        -webkit-text-fill-color: black; 
+        border: none;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+      }
+      .editbtn {
+        background-color:  #f1eded;
+        -webkit-text-fill-color: black; 
+        border: none;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+      }
     </style>
     <div>
         <ul class="todos-container"></ul>
@@ -69,24 +108,36 @@
         }
 
         createButtons(todo) {
-            var buttonsContainer = document.createElement('div');
-            var btnEdit = document.createElement('button');
-            var btnComplete = document.createElement('button');
-            var btnRemove = document.createElement('button');
+            var me = this;
+
+            me.buttonsContainer = document.createElement('div');
+            me.btnEdit = document.createElement('button');
+            me.btnComplete = document.createElement('button');
+            me.btnRemove = document.createElement('button');
 
 
-            btnEdit.setAttribute("class", "editbtn");
-            btnComplete.setAttribute("class", "togbtn");
-            btnRemove.setAttribute("class", "delbtn");
+            me.btnEdit.setAttribute("class", "editbtn");
+            me.btnComplete.setAttribute("class", "togbtn");
+            me.btnRemove.setAttribute("class", "delbtn");
 
-            btnEdit.textContent = 'edit';
-            btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
-            btnRemove.textContent = 'X';
+            me.btnEdit.textContent = 'edit';
+            me.btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
+            me.btnRemove.textContent = 'X';
 
-            if (!todo.complete) buttonsContainer.appendChild(btnEdit);
-            buttonsContainer.appendChild(btnComplete);
-            buttonsContainer.appendChild(btnRemove);
+            if (!todo.complete) buttonsContainer.appendChild(me.btnEdit);
+            buttonsContainer.appendChild(me.btnComplete);
+            buttonsContainer.appendChild(me.btnRemove);
 
+            me.btnEdit.addEventListener('click',function(e){
+                me.dispatchEvent(new CustomEvent('edit',{
+                    bubbles: true,
+                    cancelable: false,
+                    composed: true,
+                    detail:todo
+                }));
+            }); 
+
+            /*
             btnEdit.onclick = function (e) {
 
                 _submitTodoComp.underEditTodo = todo;
@@ -100,6 +151,7 @@
                 _userModel.todos.splice(_userModel.todos.indexOf(todo), 1);
                 renderTodos();
             };
+            */
 
             return buttonsContainer;
         }
