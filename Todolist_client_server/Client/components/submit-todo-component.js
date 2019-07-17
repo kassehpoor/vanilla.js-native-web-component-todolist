@@ -89,7 +89,7 @@
 
             });
 
-        }//---------------end of constructor---------------
+        }//---
 
         get value() {
             return this.getAttribute('value');
