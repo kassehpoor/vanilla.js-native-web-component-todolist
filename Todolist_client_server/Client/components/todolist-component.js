@@ -129,11 +129,11 @@
             btnComplete.textContent = todo.isCompleted ? 'Activate' : 'Complete';
             btnRemove.textContent = 'X';
 
-            !todo.complete && buttonsContainer.appendChild(btnEdit);
+            !todo.isCompleted && buttonsContainer.appendChild(btnEdit);
             buttonsContainer.appendChild(btnComplete);
             buttonsContainer.appendChild(btnRemove);
 
-            !todo.complete && btnEdit.addEventListener('click', function (e) {
+            !todo.isCompleted && btnEdit.addEventListener('click', function (e) {
                 me.dispatchEvent(new CustomEvent('edit', {
                     bubbles: true,
                     cancelable: false,
