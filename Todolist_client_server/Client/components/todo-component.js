@@ -65,7 +65,8 @@ var TodoComponent = (function () {
             var todo = e.detail;
             if (!todo) return;
 
-            _userModel.todos.splice(_userModel.todos.indexOf(todo), 1);
+            //_userModel.todos.splice(_userModel.todos.indexOf(todo), 1);
+            todo.isDeleted = true;
             renderTodos();
         });
 
@@ -90,20 +91,22 @@ var TodoComponent = (function () {
 
         _todoListComp.render(getFilteredTodos());
 
+
         function getFilteredTodos() {
             //filter ----> 0:all   1:active   2:complete
             if (!_userModel.filter) {
-                return _userModel.todos;
+                return _userModel.todos.filter(function (t) { if (!t.isDeleted) return t });
             }
             var filtered = _userModel.todos.filter(function (t) {
-                return (_userModel.filter === 1) ? !t.isCompleted : t.isCompleted;
+                if (!t.isDeleted ) return (_userModel.filter === 1) ? !t.isCompleted : t.isCompleted;
             });
             return filtered
         }
     }
 
     function deleteAllTodos() {
-        _userModel.todos = [];
+        //_userModel.todos = [];
+        _userModel.todos.forEach(function (todo) { todo.isDeleted = true; })
         renderTodos();
     }
 
