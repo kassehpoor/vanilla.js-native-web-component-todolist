@@ -30,21 +30,47 @@ var TodoComponent = (function () {
 
 
         _submitTodoComp = dom.getElementsByClassName('submitTodoComp')[0];
-        _submitTodoComp.addEventListener('submit', function (e) {
-            if (!e.detail) {
-                _submitTodoComp.value && _userModel.todos.push({ title: _submitTodoComp.value, complete: false });
-            }
-            renderTodos();
+        _todoListComp = dom.getElementsByClassName('todoListComp')[0];
 
-            _submitTodoComp.value = '';
+        _submitTodoComp.addEventListener('submit', function (e) {
+            var todo = e.detail;
+            if (!todo) return;
+
+            !todo.isEditing && _userModel.todos.push(todo);
+
+            delete todo.isEditing;
+            renderTodos();
         });
 
         _submitTodoComp.addEventListener('cancelEdit', function (e) {
+            delete todo.isEditing;
             renderTodos();
         });
 
-        // _todosContainer = dom.getElementsByClassName('todos-container')[0];
-        _todoListComp = dom.getElementsByClassName('todoListComp')[0];
+
+        _todoListComp.addEventListener('edit', function (e) {
+            if (!e.detail) return;
+            var todoUnderEdit = e.detail;
+            todoUnderEdit.isEditing = true;
+            _submitTodoComp.todo = todoUnderEdit;
+            renderTodos();
+        });
+
+        _todoListComp.addEventListener('complete', function (e) {
+            var todo = e.detail;
+            if (!todo) return;
+
+            todo.isCompleted = !todo.isCompleted;
+            renderTodos();
+        });
+
+        _todoListComp.addEventListener('remove', function (e) {
+            var todo = e.detail;
+            if (!todo) return;
+
+            _userModel.todos.splice(_userModel.todos.indexOf(todo), 1);
+            renderTodos();
+        });
 
         deleteAllTodosButton.onclick = deleteAllTodos;
         downloadTodoButton.onclick = downloadTodos;
@@ -63,13 +89,7 @@ var TodoComponent = (function () {
     function renderTodos() {
         db.setModel(_user.id, _userModel);
 
-        _todoListComp.todos = _userModel.todos;
-
-        //_todosContainer.innerHTML = '';
-        getFilteredTodos().forEach(function (todo) {
-            //_todosContainer.appendChild(createTodoElement(todo));
-            
-        });
+        _todoListComp.render(getFilteredTodos());
 
         function getFilteredTodos() {
             //filter ----> 0:all   1:active   2:complete
@@ -77,7 +97,7 @@ var TodoComponent = (function () {
                 return _userModel.todos;
             }
             var filtered = _userModel.todos.filter(function (t) {
-                return (_userModel.filter === 1) ? !t.complete : t.complete;
+                return (_userModel.filter === 1) ? !t.isCompleted : t.isCompleted;
             });
             return filtered
         }
@@ -120,58 +140,58 @@ var TodoComponent = (function () {
     }
 
 
-    function createTodoElement(todo) {
-        var li = document.createElement('li');
-        li.className = 'li';
-        var titleSpan = document.createElement('span');
+    // function createTodoElement(todo) {
+    //     var li = document.createElement('li');
+    //     li.className = 'li';
+    //     var titleSpan = document.createElement('span');
 
-        titleSpan.textContent = todo.title;
-        titleSpan.className = todo.complete
-            ? 'complete'
-            : todo.underEdit
-                ? 'editing'
-                : 'active';
-        li.appendChild(titleSpan);
-        li.appendChild(createButtons(todo));
+    //     titleSpan.textContent = todo.title;
+    //     titleSpan.className = todo.complete
+    //         ? 'complete'
+    //         : todo.underEdit
+    //             ? 'editing'
+    //             : 'active';
+    //     li.appendChild(titleSpan);
+    //     li.appendChild(createButtons(todo));
 
-        return li;
-    }
+    //     return li;
+    // }
 
-    function createButtons(todo) {
-        var buttonsContainer = document.createElement('div');
-        var btnEdit = document.createElement('button');
-        var btnComplete = document.createElement('button');
-        var btnRemove = document.createElement('button');
+    // function createButtons(todo) {
+    //     var buttonsContainer = document.createElement('div');
+    //     var btnEdit = document.createElement('button');
+    //     var btnComplete = document.createElement('button');
+    //     var btnRemove = document.createElement('button');
 
 
-        btnEdit.setAttribute("class", "editbtn");
-        btnComplete.setAttribute("class", "togbtn");
-        btnRemove.setAttribute("class", "delbtn");
+    //     btnEdit.setAttribute("class", "editbtn");
+    //     btnComplete.setAttribute("class", "togbtn");
+    //     btnRemove.setAttribute("class", "delbtn");
 
-        btnEdit.textContent = 'edit';
-        btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
-        btnRemove.textContent = 'X';
+    //     btnEdit.textContent = 'edit';
+    //     btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
+    //     btnRemove.textContent = 'X';
 
-        if (!todo.complete) buttonsContainer.appendChild(btnEdit);
-        buttonsContainer.appendChild(btnComplete);
-        buttonsContainer.appendChild(btnRemove);
+    //     if (!todo.complete) buttonsContainer.appendChild(btnEdit);
+    //     buttonsContainer.appendChild(btnComplete);
+    //     buttonsContainer.appendChild(btnRemove);
 
-        btnEdit.onclick = function (e) {
+    //     btnEdit.onclick = function (e) {
 
-            _submitTodoComp.underEditTodo = todo;
-            renderTodos();
-        };
-        btnComplete.onclick = function () {
-            todo.complete = !todo.complete;
-            renderTodos();
-        };
-        btnRemove.onclick = function () {
-            _userModel.todos.splice(_userModel.todos.indexOf(todo), 1);
-            renderTodos();
-        };
+    //         _submitTodoComp.underEditTodo = todo;
+    //         renderTodos();
+    //     };
+    //     btnComplete.onclick = function () {
+    //         todo.complete = !todo.complete;
+    //         renderTodos();
+    //     };
+    //     btnRemove.onclick = function () {
+    //         _userModel.todos.splice(_userModel.todos.indexOf(todo), 1);
+    //         renderTodos();
+    //     };
 
-        return buttonsContainer;
-    }
+    //     return buttonsContainer;
+    // }
 
     function template() {
         return `

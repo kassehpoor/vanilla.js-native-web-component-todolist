@@ -53,6 +53,20 @@
         cursor: pointer;
         border-radius: 8px;
       }
+      .complete {
+        text-decoration: line-through;
+        font-style: italic;
+        color: rgb(97, 133, 116);
+        text-decoration: line-through;
+     }
+    
+     .active {
+        color: black;
+     }
+    
+     .editing {
+        color: red;
+     }
     </style>
     <div>
         <ul class="todos-container"></ul>
@@ -72,15 +86,6 @@
 
         }
 
-        get todos() {
-            return this._todos;
-        }
-
-        set todos(value) {
-            this._todos = value;
-            this.render(this._todos || []);
-        }
-
         render(todos) {
             var me = this;
             me._todosContainer.innerHTML = '';
@@ -96,9 +101,9 @@
             var titleSpan = document.createElement('span');
 
             titleSpan.textContent = todo.title;
-            titleSpan.className = todo.complete
+            titleSpan.className = todo.isCompleted
                 ? 'complete'
-                : todo.underEdit
+                : todo.isEditing
                     ? 'editing'
                     : 'active';
             li.appendChild(titleSpan);
@@ -110,48 +115,50 @@
         createButtons(todo) {
             var me = this;
 
-            me.buttonsContainer = document.createElement('div');
-            me.btnEdit = document.createElement('button');
-            me.btnComplete = document.createElement('button');
-            me.btnRemove = document.createElement('button');
+            var buttonsContainer = document.createElement('div');
+            var btnEdit = document.createElement('button');
+            var btnComplete = document.createElement('button');
+            var btnRemove = document.createElement('button');
 
 
-            me.btnEdit.setAttribute("class", "editbtn");
-            me.btnComplete.setAttribute("class", "togbtn");
-            me.btnRemove.setAttribute("class", "delbtn");
+            btnEdit.setAttribute("class", "editbtn");
+            btnComplete.setAttribute("class", "togbtn");
+            btnRemove.setAttribute("class", "delbtn");
 
-            me.btnEdit.textContent = 'edit';
-            me.btnComplete.textContent = todo.complete ? 'Activate' : 'Complete';
-            me.btnRemove.textContent = 'X';
+            btnEdit.textContent = 'edit';
+            btnComplete.textContent = todo.isCompleted ? 'Activate' : 'Complete';
+            btnRemove.textContent = 'X';
 
-            if (!todo.complete) buttonsContainer.appendChild(me.btnEdit);
-            buttonsContainer.appendChild(me.btnComplete);
-            buttonsContainer.appendChild(me.btnRemove);
+            !todo.complete && buttonsContainer.appendChild(btnEdit);
+            buttonsContainer.appendChild(btnComplete);
+            buttonsContainer.appendChild(btnRemove);
 
-            me.btnEdit.addEventListener('click',function(e){
-                me.dispatchEvent(new CustomEvent('edit',{
+            !todo.complete && btnEdit.addEventListener('click', function (e) {
+                me.dispatchEvent(new CustomEvent('edit', {
                     bubbles: true,
                     cancelable: false,
                     composed: true,
-                    detail:todo
+                    detail: todo
                 }));
-            }); 
+            });
 
-            /*
-            btnEdit.onclick = function (e) {
+            btnComplete.addEventListener('click', function (e) {
+                me.dispatchEvent(new CustomEvent('complete', {
+                    bubbles: true,
+                    cancelable: false,
+                    composed: true,
+                    detail: todo
+                }));
+            });
 
-                _submitTodoComp.underEditTodo = todo;
-                renderTodos();
-            };
-            btnComplete.onclick = function () {
-                todo.complete = !todo.complete;
-                renderTodos();
-            };
-            btnRemove.onclick = function () {
-                _userModel.todos.splice(_userModel.todos.indexOf(todo), 1);
-                renderTodos();
-            };
-            */
+            btnRemove.addEventListener('click', function (e) {
+                me.dispatchEvent(new CustomEvent('remove', {
+                    bubbles: true,
+                    cancelable: false,
+                    composed: true,
+                    detail: todo
+                }));
+            });
 
             return buttonsContainer;
         }
@@ -161,5 +168,3 @@
     window.customElements.define('todo-list', TodolistComponent);
 
 }());
-
-//=======================================================================
