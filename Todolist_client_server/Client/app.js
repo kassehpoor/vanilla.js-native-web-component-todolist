@@ -71,7 +71,7 @@ var App = (function () {
         connection.setTokenHeader(user.id);
         db.setCurrentUser(user);
         loadUser();
-        Router.goto('todolist');
+        //Router.goto('todolist');
     }
 
 }());

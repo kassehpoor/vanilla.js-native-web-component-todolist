@@ -38,7 +38,10 @@ var Router = (function () {
 
     function render(component) {
         App.routerContainer.innerHTML = '';
-        component.init();
+        if (component === 'todo-component') {
+            App.routerContainer.appendChild(document.createElement(component));
+            return
+        }
         App.routerContainer.appendChild(component.render());
     }
 

@@ -74,7 +74,6 @@
     `;
 
     class TodolistComponent extends HTMLElement {
-
         constructor() {
             super();
 
@@ -84,6 +83,10 @@
             me._shadowRoot.appendChild(template.content.cloneNode(true));
             me._todosContainer = this._shadowRoot.querySelector('.todos-container');
 
+        }
+
+        get value () {
+            return Date.now();
         }
 
         render(todos) {
@@ -168,3 +171,4 @@
     window.customElements.define('todo-list', TodolistComponent);
 
 }());
+

@@ -11,6 +11,7 @@
     <script src="components/header-component.js"></script>
     <script src="components/todolist-component.js"></script>
     <script src="components/filtertodo-component.js"></script>
+    <script src="components/todo-component.js"></script>
    
 </head>
 
@@ -19,13 +20,14 @@
     <headr-component id="headerComponent"></headr-component>
        
     <div id="router"></div>
+    <!-- <todo-component></todo-component> -->
 
     <script src="http.js"></script>
     <script src="db.js"></script>
     <script src="connection.js"></script>
     <script src="app.js"></script>
     <script src="router.js"></script>
-    <script src="components/todo-component.js"></script>
+    
     <script src="components/signin-component.js"></script>
     <script src="components/signup-component.js"></script>
     <script src="components/signout-component.js"></script>
@@ -33,7 +35,7 @@
 
     <script>
         var routes = [
-            { name: 'todolist', component: TodoComponent, default: true },
+            { name: 'todolist', component: 'todo-component', default: true },
             { name: 'signin', component: SignInComponent },
             { name: 'signup', component: SignUpComponent },
             { name: 'signout', component: SignOutComponent }
