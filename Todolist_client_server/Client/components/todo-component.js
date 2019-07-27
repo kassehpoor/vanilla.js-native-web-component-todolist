@@ -140,9 +140,10 @@
                 me._userModel.filter = e.detail;
                 me.renderTodos();
             });
-        }
+        }/////
 
         connectedCallback() {
+      
             var me = this;
             me._user = {};
             me._userModel = {};
@@ -152,25 +153,29 @@
             me._userModel = db.getModel(me._user.id) || { todos: [], filter: 0 };
 
             me.renderTodos();
-         
         }
 
         renderTodos() {
             var me = this;
             db.setModel(me._user.id, me._userModel);
 
-            // me._todoListComp.render(getFilteredTodos());
+            setTimeout(() => this._todoListComp.render(getFilteredTodos()))
+            document.addEventListener('DOMContentLoaded', () => this._todoListComp.render(getFilteredTodos()))
+            window.onload = () => this._todoListComp.render(getFilteredTodos())
+            window.addEventListener('load', () => this._todoListComp.render(getFilteredTodos()))
+
+             // me._todoListComp.render(getFilteredTodos());
             
-            setTimeout(() => {
-                me._todoListComp.render(getFilteredTodos());
-            });
+            //  setTimeout(() => {
+            //     me._todoListComp.render(getFilteredTodos());
+            // });
 
             function getFilteredTodos() {
                 //filter ----> 0:all   1:active   2:complete
                 if (!me._userModel.filter) {
                     return me._userModel.todos.filter(function (t) { if (!t.isDeleted) return t });
                 }
-                
+
                 return me._userModel.todos.filter(function (t) {
                     if (!t.isDeleted) return (me._userModel.filter === 1) ? !t.isCompleted : t.isCompleted;
                 });
@@ -180,9 +185,7 @@
 
     window.customElements.define('todo-component', TodoComponent);
 
-
 }());
-
 
 
 /*

@@ -89,82 +89,83 @@
             return Date.now();
         }
 
-        render(todos) {
-            var me = this;
-            me._todosContainer.innerHTML = '';
-            todos.forEach(function (todo) {
-                me._todosContainer.appendChild(me.createTodoElement(todo));
-            })
-
-        }
-
-        createTodoElement(todo) {
-            var li = document.createElement('li');
-            li.className = 'li';
-            var titleSpan = document.createElement('span');
-
-            titleSpan.textContent = todo.title;
-            titleSpan.className = todo.isCompleted
-                ? 'complete'
-                : todo.isEditing
-                    ? 'editing'
-                    : 'active';
-            li.appendChild(titleSpan);
-            li.appendChild(this.createButtons(todo));
-
-            return li;
-        }
-
-        createButtons(todo) {
-            var me = this;
-
-            var buttonsContainer = document.createElement('div');
-            var btnEdit = document.createElement('button');
-            var btnComplete = document.createElement('button');
-            var btnRemove = document.createElement('button');
-
-
-            btnEdit.setAttribute("class", "editbtn");
-            btnComplete.setAttribute("class", "togbtn");
-            btnRemove.setAttribute("class", "delbtn");
-
-            btnEdit.textContent = 'edit';
-            btnComplete.textContent = todo.isCompleted ? 'Activate' : 'Complete';
-            btnRemove.textContent = 'X';
-
-            !todo.isCompleted && buttonsContainer.appendChild(btnEdit);
-            buttonsContainer.appendChild(btnComplete);
-            buttonsContainer.appendChild(btnRemove);
-
-            !todo.isCompleted && btnEdit.addEventListener('click', function (e) {
-                me.dispatchEvent(new CustomEvent('edit', {
-                    bubbles: true,
-                    cancelable: false,
-                    composed: true,
-                    detail: todo
-                }));
-            });
-
-            btnComplete.addEventListener('click', function (e) {
-                me.dispatchEvent(new CustomEvent('complete', {
-                    bubbles: true,
-                    cancelable: false,
-                    composed: true,
-                    detail: todo
-                }));
-            });
-
-            btnRemove.addEventListener('click', function (e) {
-                me.dispatchEvent(new CustomEvent('remove', {
-                    bubbles: true,
-                    cancelable: false,
-                    composed: true,
-                    detail: todo
-                }));
-            });
-
-            return buttonsContainer;
-        }
+       
+            render(todos) {
+                var me = this;
+                me._todosContainer.innerHTML = '';
+                todos.forEach(function (todo) {
+                    me._todosContainer.appendChild(me.createTodoElement(todo));
+                })
+    
+            }
+    
+            createTodoElement(todo) {
+                var li = document.createElement('li');
+                li.className = 'li';
+                var titleSpan = document.createElement('span');
+    
+                titleSpan.textContent = todo.title;
+                titleSpan.className = todo.isCompleted
+                    ? 'complete'
+                    : todo.isEditing
+                        ? 'editing'
+                        : 'active';
+                li.appendChild(titleSpan);
+                li.appendChild(this.createButtons(todo));
+    
+                return li;
+            }
+    
+            createButtons(todo) {
+                var me = this;
+    
+                var buttonsContainer = document.createElement('div');
+                var btnEdit = document.createElement('button');
+                var btnComplete = document.createElement('button');
+                var btnRemove = document.createElement('button');
+    
+    
+                btnEdit.setAttribute("class", "editbtn");
+                btnComplete.setAttribute("class", "togbtn");
+                btnRemove.setAttribute("class", "delbtn");
+    
+                btnEdit.textContent = 'edit';
+                btnComplete.textContent = todo.isCompleted ? 'Activate' : 'Complete';
+                btnRemove.textContent = 'X';
+    
+                !todo.isCompleted && buttonsContainer.appendChild(btnEdit);
+                buttonsContainer.appendChild(btnComplete);
+                buttonsContainer.appendChild(btnRemove);
+    
+                !todo.isCompleted && btnEdit.addEventListener('click', function (e) {
+                    me.dispatchEvent(new CustomEvent('edit', {
+                        bubbles: true,
+                        cancelable: false,
+                        composed: true,
+                        detail: todo
+                    }));
+                });
+    
+                btnComplete.addEventListener('click', function (e) {
+                    me.dispatchEvent(new CustomEvent('complete', {
+                        bubbles: true,
+                        cancelable: false,
+                        composed: true,
+                        detail: todo
+                    }));
+                });
+    
+                btnRemove.addEventListener('click', function (e) {
+                    me.dispatchEvent(new CustomEvent('remove', {
+                        bubbles: true,
+                        cancelable: false,
+                        composed: true,
+                        detail: todo
+                    }));
+                });
+    
+                return buttonsContainer;
+            }
 
     }
 

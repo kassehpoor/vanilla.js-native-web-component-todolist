@@ -123,8 +123,6 @@
                     return this._currentUserDisplayName.textContent = newValue || 'anonymous user';
             }
         }
-
-
     }
 
     window.customElements.define('headr-component', HeaderComponent)
