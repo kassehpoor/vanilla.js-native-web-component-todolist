@@ -35,9 +35,9 @@
     <script>
         var routes = [
             { name: 'todolist', component: 'todo-component', default: true },
-            { name: 'signin', component: SignInComponent },
-            { name: 'signup', component: SignUpComponent },
-            { name: 'signout', component: SignOutComponent }
+            { name: 'signin', component: 'signin-component'},
+            { name: 'signup', component: 'signup-component' },
+            { name: 'signout', component: 'signout-component' }
         ];
         App.init(document.getElementById('app'), document.getElementById('router'), routes);
      

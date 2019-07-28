@@ -76,7 +76,7 @@
             });
 
             me._cancleEditButton.addEventListener('click', e => {
-                this.dispatchEvent(new CustomEvent('cancelEdit', {
+                me.dispatchEvent(new CustomEvent('cancelEdit', {
                     bubbles: true,
                     cancelable: false,
                     composed: true

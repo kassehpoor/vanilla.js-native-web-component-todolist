@@ -38,11 +38,14 @@ var Router = (function () {
 
     function render(component) {
         App.routerContainer.innerHTML = '';
-        if (component === 'todo-component') {
-            App.routerContainer.appendChild(document.createElement(component));
-            return
-        }
-        App.routerContainer.appendChild(component.render());
+
+        App.routerContainer.appendChild(document.createElement(component));
+
+        // if (component === 'todo-component') {
+        //     App.routerContainer.appendChild(document.createElement(component));
+        //     return
+        // }
+        // App.routerContainer.appendChild(component.render());
     }
 
 }());

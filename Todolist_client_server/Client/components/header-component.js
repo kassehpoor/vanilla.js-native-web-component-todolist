@@ -51,7 +51,7 @@
             <input type="button" value="Sign in" class="btn-Signin" />
             <input type="button" value="Sign up" class="btn-Signup" />
             <input type="button" value="Sign out" class="btn-Signout" />
-        </div>
+        </div> 
     </header>
     <span class="spnUserDisplayName"></span>
     `;
@@ -70,36 +70,21 @@
             me._signoutButton = this._shadowRoot.querySelector('.btn-Signout');
             me._currentUserDisplayName = this._shadowRoot.querySelector('.spnUserDisplayName');
 
+
             me._signinButton.addEventListener('click', e => {
-
-                this.dispatchEvent(new CustomEvent('signin', {
-                    bubbles: true,
-                    cancelable: false,
-                    composed: true
-                }));
-
+                this._currentUserDisplayName.textContent = '';
+                Router.goto('signin');
             });
 
             me._signupButton.addEventListener('click', e => {
-
-                this.dispatchEvent(new CustomEvent('signup', {
-                    bubbles: true,
-                    cancelable: false,
-                    composed: true
-                }));
-
+                this._currentUserDisplayName.textContent = '';
+                Router.goto('signup');
             });
 
             me._signoutButton.addEventListener('click', e => {
 
-                this.dispatchEvent(new CustomEvent('signout', {
-                    bubbles: true,
-                    cancelable: false,
-                    composed: true
-                }));
-
+                Router.goto('signout');
             });
-
         }
 
         get displayName() {

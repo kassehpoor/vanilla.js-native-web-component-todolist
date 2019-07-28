@@ -51,12 +51,12 @@
 
             var me = this;
 
+           //me._todoListComp = document.createElement('todoListComp');
+            
             me._shadowRoot = this.attachShadow({ 'mode': 'open' });
+            //me._shadowRoot.appendChild(_todoListComp);
             me._shadowRoot.appendChild(template.content.cloneNode(true));
-            me._isconnected = template.isConnected;
 
-            //me._entries = this._shadowRoot.querySelector('.entries');
-            //me._listOfTodos = this._shadowRoot.querySelector('.list-of-todos');
             me._deleteAllTodosButton = this._shadowRoot.querySelector('.delete-all-todos-button');
             me._downloadTodoButton = this._shadowRoot.querySelector('.download-todo-button');
             me._uploadTodoButton = this._shadowRoot.querySelector('.upload-todo-button');
@@ -104,6 +104,7 @@
 
                 delete todo.isEditing;
                 me.renderTodos();
+
             });
 
             me._submitTodoComp.addEventListener('cancelEdit', function (e) {
@@ -119,7 +120,7 @@
                 me.renderTodos();
             });
 
-            me._todoListComp.addEventListener('complete', function (e) {
+           me._todoListComp.addEventListener('complete', function (e) {
                 var todo = e.detail;
                 if (!todo) return;
 
@@ -140,10 +141,10 @@
                 me._userModel.filter = e.detail;
                 me.renderTodos();
             });
-        }/////
+        }
 
         connectedCallback() {
-      
+
             var me = this;
             me._user = {};
             me._userModel = {};
@@ -153,23 +154,22 @@
             me._userModel = db.getModel(me._user.id) || { todos: [], filter: 0 };
 
             me.renderTodos();
+
         }
 
         renderTodos() {
             var me = this;
             db.setModel(me._user.id, me._userModel);
 
-            setTimeout(() => this._todoListComp.render(getFilteredTodos()))
-            document.addEventListener('DOMContentLoaded', () => this._todoListComp.render(getFilteredTodos()))
-            window.onload = () => this._todoListComp.render(getFilteredTodos())
-            window.addEventListener('load', () => this._todoListComp.render(getFilteredTodos()))
+            //setTimeout(() => me._todoListComp.render(getFilteredTodos()))
+            // document.addEventListener('DOMContentLoaded', () => me._todoListComp.render(getFilteredTodos()))
+            // window.onload = () => me._todoListComp.render(getFilteredTodos())
+            // window.addEventListener('load', () => me._todoListComp.render(getFilteredTodos()))
 
-             // me._todoListComp.render(getFilteredTodos());
-            
-            //  setTimeout(() => {
-            //     me._todoListComp.render(getFilteredTodos());
-            // });
-
+            setTimeout(() => {
+                me._todoListComp.render(getFilteredTodos());
+            });
+       
             function getFilteredTodos() {
                 //filter ----> 0:all   1:active   2:complete
                 if (!me._userModel.filter) {
@@ -187,7 +187,7 @@
 
 }());
 
-
+/***************************************************************************************** */
 /*
 var TodoComponent = (function () {
 
