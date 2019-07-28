@@ -108,7 +108,6 @@
         cancelSingIn() {
             Router.goto('todolist');
         }
-
     }
     window.customElements.define('signin-component', SignInComponent);
 }())

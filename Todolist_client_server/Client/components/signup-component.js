@@ -117,8 +117,6 @@
     window.customElements.define('signup-component', SignUpComponent);
 }())
 
-
-
 //************************************************************************ */
 /*
 var SignUpComponent = (function () {

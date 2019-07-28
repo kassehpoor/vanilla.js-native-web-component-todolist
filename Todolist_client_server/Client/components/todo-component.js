@@ -51,10 +51,7 @@
 
             var me = this;
 
-           //me._todoListComp = document.createElement('todoListComp');
-            
             me._shadowRoot = this.attachShadow({ 'mode': 'open' });
-            //me._shadowRoot.appendChild(_todoListComp);
             me._shadowRoot.appendChild(template.content.cloneNode(true));
 
             me._deleteAllTodosButton = this._shadowRoot.querySelector('.delete-all-todos-button');
@@ -120,7 +117,7 @@
                 me.renderTodos();
             });
 
-           me._todoListComp.addEventListener('complete', function (e) {
+            me._todoListComp.addEventListener('complete', function (e) {
                 var todo = e.detail;
                 if (!todo) return;
 
@@ -153,7 +150,8 @@
             me._user = App.user;
             me._userModel = db.getModel(me._user.id) || { todos: [], filter: 0 };
 
-            me.renderTodos();
+
+            document.addEventListener('DOMContentLoaded', () => me.renderTodos());
 
         }
 
@@ -161,15 +159,11 @@
             var me = this;
             db.setModel(me._user.id, me._userModel);
 
-            //setTimeout(() => me._todoListComp.render(getFilteredTodos()))
-            // document.addEventListener('DOMContentLoaded', () => me._todoListComp.render(getFilteredTodos()))
-            // window.onload = () => me._todoListComp.render(getFilteredTodos())
-            // window.addEventListener('load', () => me._todoListComp.render(getFilteredTodos()))
+            // setTimeout(() => {
+            //     me._todoListComp.render(getFilteredTodos());
+            // });
+            me._todoListComp.render(getFilteredTodos());
 
-            setTimeout(() => {
-                me._todoListComp.render(getFilteredTodos());
-            });
-       
             function getFilteredTodos() {
                 //filter ----> 0:all   1:active   2:complete
                 if (!me._userModel.filter) {
